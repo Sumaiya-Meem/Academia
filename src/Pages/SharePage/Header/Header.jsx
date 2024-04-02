@@ -90,7 +90,7 @@ const Header = () => {
                 }
               >
                 <div className="flex items-center gap-1 font-semibold">
-                  <CiLogin className="text-xl text-[#cd4b4b] font-bold"></CiLogin><p className="text-xl text-[#bc0024]">Login</p>
+                  <CiLogin className="text-xl text-white font-bold"></CiLogin><p className="text-xl text-white">Login</p>
                 </div>
               </NavLink>
             </>

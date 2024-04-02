@@ -126,7 +126,7 @@ const Login = () => {
             </div>
           </div>
           <h1 className="mt-5">
-            Don't have any account ? 
+          {"Don't"} have any account ? 
             <Link className="text-blue-400 underline ml-1" to="/registration">
                Registration
             </Link>
