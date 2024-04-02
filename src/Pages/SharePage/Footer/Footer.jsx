@@ -1,9 +1,34 @@
-
-
+import { FaFacebookF } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { FiInstagram } from "react-icons/fi";
 const Footer = () => {
+
+    const currentYear=new Date().getFullYear();
     return (
-        <div>
-            This is Footer section
+        <div className="mt-0">
+            <div className="flex flex-col md:flex-row">
+                <div className="flex-1 flex flex-col justify-center items-center p-5 bg-[#003666] text-white">
+                     <h1 className="text-xl">CONTACT US</h1>
+                      <p className="text-[14px] text-[#a9a8a8]">09 Street, Uttra, Bangladesh</p>
+                      <p className="text-[14px] text-[#a9a8a8]">+88 123456789</p>
+                      <p className="text-[14px] text-[#a9a8a8]">Sun- Thu: 08:00 AM - 05:00 PM</p>
+                      <p className="text-[14px] text-[#a9a8a8]">Fri - Sat : 10:00 AM - 02:00 PM</p>
+
+                </div>
+                <div className="flex-1 flex flex-col justify-center items-center p-5 bg-[#00205b] text-white">
+                     <h1 className="text-xl">FOLLOW US</h1>
+                     <p className="text-[14px] text-[#a9a8a8]">Join us on social media</p>
+                     <div className="flex gap-3 text-white mt-3 shadow-xl bg-[#00205b77] p-1">
+                        <FaFacebookF></FaFacebookF>
+                        <FiInstagram></FiInstagram>
+                        <FaTwitter></FaTwitter>
+                     </div>
+
+                </div>
+            </div>
+            <div className="bg-black">
+              <p className="text-center text-[14px] text-[#a9a8a8] py-2"> Copyright © Academia {currentYear}. All rights reserved</p>
+            </div>
         </div>
     );
 };

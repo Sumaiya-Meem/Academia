@@ -1,5 +1,5 @@
 import { Avatar, Button, Dropdown, Navbar } from "flowbite-react";
-import logo from "../../../../public/logo.png"
+// import logo from "../../../../public/logo.png"
 import { Link, NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
 import { CiLogin } from "react-icons/ci";
@@ -45,10 +45,10 @@ const Header = () => {
     <Navbar fluid rounded className="fixed bg-black z-10 bg-opacity-30 w-[1024px] text-white">
     <Navbar.Brand href="/">
           <div className="flex items-center ">
-          <img src={logo} className="mr-3 h-12 w-16" alt="Logo" />
-          <div className="flex flex-col">
-          <h1 className="font-serif text-xl font-bold">CafeMoon</h1>
-          <h3 className="text-[18px] font-bold">Resturant</h3>
+          {/* <img src={logo} className="mr-3 h-12" alt="Logo" /> */}
+          <div className="flex flex-col text-[#bc0024]">
+          <h1 className="font-serif text-xl text-center font-bold">Academia</h1>
+          {/* <h3 className="text-[18px] font-bold">Online Education & Learning</h3> */}
           </div>
           </div>
         </Navbar.Brand>
@@ -72,7 +72,7 @@ const Header = () => {
             <Dropdown.Divider />
             <Dropdown.Item>
             <Button color="" className=''  onClick={handleLogout}>
-            <span className='mr-2 text-xl'><IoIosLogOut></IoIosLogOut></span> LogOut
+            <span className='mr-2 text-xl'><IoIosLogOut className="text-red-700 font-bold"></IoIosLogOut></span> LogOut
         </Button>
             </Dropdown.Item>
         </Dropdown> 
