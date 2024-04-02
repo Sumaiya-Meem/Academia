@@ -17,7 +17,7 @@ const Register = () => {
 
     // const axiosPublic = useAxiosPublic();
     // const {createUser} = useContext(ContextProvider);
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
