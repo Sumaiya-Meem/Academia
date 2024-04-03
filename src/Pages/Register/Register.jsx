@@ -49,7 +49,7 @@ const Register = () => {
                      })
                      .then(()=> {
 
-                        axiosPublic.post('/users', {email: result?.user?.email, name: result?.user?.displayName})
+                        axiosPublic.post('/users', {email: result?.user?.email, name: result?.user?.displayName,role: 'admin'})
                         .then(res=> {
                             if (res.data.insertedId) {
                                 console.log('user added to the database')
@@ -91,7 +91,7 @@ const Register = () => {
  
 
                 <form className="w-full " onSubmit={handleSubmit(onSubmit)}>
-                    <h2 className="text-2xl text-white font-bold mb-2">Registration Now</h2>
+                    <h2 className="text-2xl text-white font-bold mb-2 text-center">Registration Now</h2>
 
                     <div className="mb-2">
                         <input

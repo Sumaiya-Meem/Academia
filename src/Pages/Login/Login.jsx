@@ -1,15 +1,17 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import bg from "../../assets/login.avif"
 import { ContextProvider } from "../Context/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Login = () => {
-  const { signInUser} = useContext(ContextProvider);
-
+  const { signInUser, signInGoogle } = useContext(ContextProvider);
+  const axiosPublic = useAxiosPublic();
+  const navigate =useNavigate();
 
 
   const {
@@ -39,9 +41,29 @@ const Login = () => {
       });
   };
 
- const handleGoogle =() =>{
-
- }
+  const handleGoogle = () => {
+    signInGoogle()
+      .then((result) => {
+        if (result.user) {
+          axiosPublic
+            .post("/users", {
+              email: result.user.email,
+              name: result.user.displayName,
+              role: "user",
+            })
+            .then((res) => {
+              if (res.data) {
+                toast.success("sign in successfully");
+                navigate("/");
+              }
+            });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
+  };
   const backgroundImageStyle = {
     backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${bg})`,
     backgroundSize: "cover",
@@ -59,7 +81,7 @@ const Login = () => {
           className=""
           onSubmit={handleSubmit(onSubmit)}
         >
-          <h2 className="text-2xl font-bold mb-4">Login</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center ">Login Now</h2>
 
           <div className="mb-4">
             <label
@@ -119,7 +141,7 @@ const Login = () => {
             </div>
             <div
               onClick={handleGoogle}
-              className="w-full text-center border bg-blue-900  px-4 py-2 rounded-full flex items-center justify-center gap-1 text-xl"
+              className="w-full cursor-pointer text-center border bg-blue-900  px-4 py-2 rounded-full flex items-center justify-center gap-1 text-xl"
             >
                 <p><FcGoogle></FcGoogle></p>
               <p>Google</p>
