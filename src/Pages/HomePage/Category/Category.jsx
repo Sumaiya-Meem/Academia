@@ -1,6 +1,6 @@
 import useCategory from "../../../Hooks/useCategory";
 
-
+import './Category.css'
 const Category = () => {
     const {category } = useCategory();
     if (!category ) {
@@ -10,13 +10,22 @@ const Category = () => {
         <div>
             
             <div>
-                    <h1 className="text-[40px] font-bold font-[Poppins] text-[#22323d]">Creative Categories <br></br> For Students </h1>
+                    <h1 className="text-2xl lg:text-[40px]  mb-10 font-bold font-[Poppins] text-[#22323d]">Creative Categories <br></br> For Students </h1>
                 </div>
-                <div className="grid grid-cols-5 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-3">
                     {category.map((data, index) => (
-                        <div key={index} className="mb-6">
-                            <p className="text-gray-600">{data.title}</p>
-                            {/* <img src={technology.photo} alt={technology.title} className="w-20 h-20" /> */}
+                         <div key={index} className="card mb-6  p-4 " >
+                            <div className="box">
+                                <div className="icon">
+                                    <div className="iconbox"></div>
+
+                                </div>
+                                <div className="content">
+                                <h1 className="">{data.title}</h1>
+                            <p className="p-2">{data.description}</p>
+                                </div>
+                            </div>
+                            
                         </div>
                     ))}
                 </div>

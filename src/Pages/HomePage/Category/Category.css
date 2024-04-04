@@ -1,0 +1,41 @@
+
+
+  
+  .card {
+    border-radius: 20px;
+    border-top-left-radius: 70px;
+   
+    overflow: hidden;
+    height: 250px;
+    width: 300px;
+    position: relative;
+  }
+.box{
+    position: absolute;
+    inset:8px;
+    background: linear-gradient(rgba(5,10,35,0.75), rgba(5,10,35,0.75));
+    border-radius: 10px;
+}
+.box .icon{
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    background: #371777;
+    border-bottom-right-radius: 50%;
+}
+
+.iconbox{
+    position: absolute;
+    inset: 10px;
+    background: linear-gradient(rgba(5,10,35,0.75), rgba(5,10,35,0.75));
+    border-radius: 50%;
+    border-top-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.content{
+    position: absolute;
+    top:80px;
+    text-align: center;
+    color:white;
+}

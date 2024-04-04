@@ -56,11 +56,11 @@ const Header = () => {
     return (
         <div>
 
-    <Navbar fluid rounded className="fixed bg-[#050a230a] z-10 bg-opacity-30 w-[1024px] text-white">
+    <Navbar fluid rounded className="fixed bg-black z-10 bg-opacity-30 w-[1024px] text-white">
     <Navbar.Brand href="/">
           <div className="flex items-center ">
           {/* <img src={logo} className="mr-3 h-12" alt="Logo" /> */}
-          <div className="flex flex-col text-white">
+          <div className="flex flex-col text-[#bc0024]">
           <h1 className="font-serif text-xl text-center font-bold">Academia</h1>
           {/* <h3 className="text-[18px] font-bold">Online Education & Learning</h3> */}
           </div>
