@@ -55,7 +55,7 @@ const Register = () => {
                                 console.log('user added to the database')
                                 reset();
                                 Swal.fire({
-                                    position: 'top-end',
+                                    position: 'top-center',
                                     icon: 'success',
                                     title: 'User created successfully.',
                                     showConfirmButton: false,

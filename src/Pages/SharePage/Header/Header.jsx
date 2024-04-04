@@ -33,6 +33,20 @@ const Header = () => {
       >
         Home
       </NavLink>
+      {
+            user ?
+            <NavLink
+        to="/dashboard/adminHome"
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "text-[#bc0024] font-bold  " : "text-white"
+        }
+      >
+       Dashboard
+      </NavLink>
+      : 
+      <> </>
+            
+        }
       
 
      
@@ -46,7 +60,7 @@ const Header = () => {
     <Navbar.Brand href="/">
           <div className="flex items-center ">
           {/* <img src={logo} className="mr-3 h-12" alt="Logo" /> */}
-          <div className="flex flex-col text-[#bc0024]">
+          <div className="flex flex-col text-white">
           <h1 className="font-serif text-xl text-center font-bold">Academia</h1>
           {/* <h3 className="text-[18px] font-bold">Online Education & Learning</h3> */}
           </div>

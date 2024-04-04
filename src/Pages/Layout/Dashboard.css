@@ -1,0 +1,46 @@
+.side-container {
+    overflow-y: auto; 
+    overflow-x: hidden;
+  }
+/* .side-container::-webkit-scrollbar{
+    display: none;
+} */
+.nav-option{
+    border-bottom: 2px solid rgb(234, 234, 233);
+}
+.nav-option:hover{
+  background-color: rgb(228, 227, 227);
+  color:blue;
+}
+
+
+
+@media screen and (min-width: 1200px) {
+    .navCollapse{
+        width: 0px;
+        transition: .2s ease-in-out;
+        padding-left: 0px;
+    }
+    .navCollapse .nav-option h2{
+        display: none;
+    }
+    .smallDevice_justify{
+        display: none;
+    }
+    
+}
+@media screen and (max-width: 1199px){
+    .largeDevice_justify{
+        display: none;
+    }
+    .side-container{
+        display: none;
+   }
+    .smallNav{
+        display: block;
+    }
+    .navCollapse{
+        width: 80px;
+    }
+    
+}

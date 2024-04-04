@@ -5,6 +5,8 @@ import MainLayout from "../Layout/MainLayout";
 import Home from "../HomePage/Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import AdminHome from "../DashboardPage/AdminPage/AdminHome/AdminHome";
+import LayoutDA from "../Layout/LayoutDA";
 
 
   
@@ -28,5 +30,16 @@ import Register from "../Register/Register";
         },
       ],
     },
-   
+    {
+      path: 'dashboard',
+      element: <LayoutDA></LayoutDA>,
+      children: [
+  
+        {
+          path: 'adminHome',
+          element:<AdminHome></AdminHome>
+        },
+    
+    ]
+  }
   ]);
