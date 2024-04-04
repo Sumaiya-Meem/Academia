@@ -9,6 +9,7 @@ import AdminHome from "../DashboardPage/AdminPage/AdminHome/AdminHome";
 import LayoutDA from "../Layout/LayoutDA";
 import AdminProfile from "../DashboardPage/AdminPage/AdminProfile/AdminProfile";
 import AddTechnology from "../DashboardPage/AdminPage/AddTechnology/AddTechnology";
+import CreativeCategory from "../DashboardPage/AdminPage/CreativeCategory/CreativeCategory";
 
 
   
@@ -48,7 +49,12 @@ import AddTechnology from "../DashboardPage/AdminPage/AddTechnology/AddTechnolog
         {
           path: 'addTechnoloy',
           element:<AddTechnology></AddTechnology>
-        }
+        },
+        
+        {
+          path: 'addCreativeCatories',
+          element:<CreativeCategory></CreativeCategory>
+        },
         
         
     
