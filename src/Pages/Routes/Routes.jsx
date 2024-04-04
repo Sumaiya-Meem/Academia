@@ -7,6 +7,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import AdminHome from "../DashboardPage/AdminPage/AdminHome/AdminHome";
 import LayoutDA from "../Layout/LayoutDA";
+import AdminProfile from "../DashboardPage/AdminPage/AdminProfile/AdminProfile";
 
 
   
@@ -39,6 +40,11 @@ import LayoutDA from "../Layout/LayoutDA";
           path: 'adminHome',
           element:<AdminHome></AdminHome>
         },
+        {
+          path: 'adminProfile',
+          element:<AdminProfile></AdminProfile>
+        },
+        
     
     ]
   }
