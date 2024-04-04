@@ -8,6 +8,7 @@ import Register from "../Register/Register";
 import AdminHome from "../DashboardPage/AdminPage/AdminHome/AdminHome";
 import LayoutDA from "../Layout/LayoutDA";
 import AdminProfile from "../DashboardPage/AdminPage/AdminProfile/AdminProfile";
+import AddTechnology from "../DashboardPage/AdminPage/AddTechnology/AddTechnology";
 
 
   
@@ -44,6 +45,11 @@ import AdminProfile from "../DashboardPage/AdminPage/AdminProfile/AdminProfile";
           path: 'adminProfile',
           element:<AdminProfile></AdminProfile>
         },
+        {
+          path: 'addTechnoloy',
+          element:<AddTechnology></AddTechnology>
+        }
+        
         
     
     ]
