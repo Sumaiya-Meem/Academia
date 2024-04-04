@@ -1,11 +1,28 @@
 import { useForm } from "react-hook-form";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 
 
 const CreativeCategory = () => {
-    const { handleSubmit, register,reset,} = useForm();
+    const { handleSubmit, register,reset} = useForm();
+    const axiosPublic = useAxiosPublic();
 
     const onSubmit =async (data) => {
+        const category = {
+            title:data.title,
+            description: data.description
+        }
+        console.log(category)
+        axiosPublic.post('/category', category)
+        .then(res=> {
+            console.log(res.data)
+               if(res.data.acknowledged){
+                
+                       toast.success('create category successfully')
+                       
+               }
+        })
+        reset();
     }
     return (
         <div>
