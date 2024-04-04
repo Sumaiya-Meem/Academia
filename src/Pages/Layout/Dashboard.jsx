@@ -19,7 +19,7 @@ const Dashboard = () => {
     const userData = async () => {
       const res = await axiosSecure.get(`users/${user.email}`);
       const data = res.data;
-      console.log(data);
+    //   console.log(data);
 
       if (data.role === "admin") {
         setIsAdmin(true);

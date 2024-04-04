@@ -10,7 +10,7 @@ const AddTechnology = () => {
     const axiosPublic = useAxiosPublic();
 
     const onSubmit =async (data) => {
-        console.log(data);
+        // console.log(data);
         const imgFile = { image: data.photo[0] }
         console.log(imgFile)
         const res = await axiosPublic.post(img_hosting_api, imgFile, {
@@ -24,7 +24,7 @@ const AddTechnology = () => {
         if(img_url){
             const technology = {
                 title:data.title,
-                photo: data.photo
+                photo: img_url 
             }
             axiosPublic.post('/technology',technology)
             .then(res=> {
