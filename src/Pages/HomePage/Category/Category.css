@@ -1,4 +1,4 @@
-
+/* 
 
   
   .card {
@@ -38,4 +38,23 @@
     top:80px;
     text-align: center;
     color:white;
+} */
+
+.card{
+    position: relative;
+    background: #1aae9d;
+    box-shadow: 10px;
+    border-radius: 15px;
+}
+
+.icon{
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    top:3%;
+    left:30%;
+    background: blue;
+    border-radius: 50%;
+    border: 10px solid #fff;
+    transform: translateY(-50%);
 }
