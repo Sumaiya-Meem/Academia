@@ -42,7 +42,7 @@ const Header = () => {
     return (
         <div>
 
-    <Navbar fluid rounded className="fixed bg-black z-10 bg-opacity-30 w-[1024px] text-white">
+    <Navbar fluid rounded className="fixed bg-[#050a230a] z-10 bg-opacity-30 w-[1024px] text-white">
     <Navbar.Brand href="/">
           <div className="flex items-center ">
           {/* <img src={logo} className="mr-3 h-12" alt="Logo" /> */}
