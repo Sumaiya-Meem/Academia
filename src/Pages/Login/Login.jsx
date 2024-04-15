@@ -1,17 +1,20 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import bg from "../../assets/login.avif"
 import { ContextProvider } from "../Context/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
-import Swal from "sweetalert2";
+
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Login = () => {
   const { signInUser, signInGoogle } = useContext(ContextProvider);
   const axiosPublic = useAxiosPublic();
   const navigate =useNavigate();
+  const location =useLocation();
+
+  const from=location.state?.from?.pathname || "/";
 
 
   const {
@@ -24,15 +27,10 @@ const Login = () => {
     signInUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
-        Swal.fire({
-          title: 'User Login Successful.',
-          showClass: {
-              popup: 'animate__animated animate__fadeInDown'
-          },
-          hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-          }
-      });
+       
+        toast.success('login successfully')
+                           
+      navigate(from,{replace:true});
   
       })
       .catch((error) => {
@@ -74,7 +72,7 @@ const Login = () => {
   return (
     <div style={backgroundImageStyle} className="w-full bg-gradient-to-r from-[#00000033] to-[#00000033] mt-0">
         <div className="flex items-center justify-center w-[100%] md:w-[60%] lg:w-[40%] mx-auto " >
-      <div className="mt-28 text-white p-2 w-full bg-gray-400 shadow-lg rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-600">
+      <div className="mt-28 text-white p-2 w-full bg-gray-400 shadow-lg rounded-md bg-clip-padding backdrop-filter m-3 backdrop-blur-md bg-opacity-10 border border-gray-600">
  
    
         <form

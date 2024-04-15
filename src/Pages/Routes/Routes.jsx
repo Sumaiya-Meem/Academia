@@ -10,6 +10,8 @@ import LayoutDA from "../Layout/LayoutDA";
 import AdminProfile from "../DashboardPage/AdminPage/AdminProfile/AdminProfile";
 import AddTechnology from "../DashboardPage/AdminPage/AddTechnology/AddTechnology";
 import CreativeCategory from "../DashboardPage/AdminPage/CreativeCategory/CreativeCategory";
+import ErrorPage from "../Errorpage/ErrorPage";
+
 
 
   
@@ -17,6 +19,7 @@ import CreativeCategory from "../DashboardPage/AdminPage/CreativeCategory/Creati
     {
       path: "/",
       element: <MainLayout></MainLayout>,
+      errorElement:<ErrorPage></ErrorPage>,
       children: [
         {
           path: "/",

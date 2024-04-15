@@ -29,7 +29,7 @@ const Category = () => {
      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-3 ">
         {category.map((data, index) => (
-          <div key={index} className="card mb-6  p-4 ">
+          <div key={index} className="card mb-6  p-4 mx-2">
             <div className="icon">
               <div className="imgBox">
                 <img src={data.photo} alt="" className="" />

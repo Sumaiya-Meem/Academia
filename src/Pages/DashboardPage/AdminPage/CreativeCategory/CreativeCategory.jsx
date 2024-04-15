@@ -24,7 +24,7 @@ const CreativeCategory = () => {
     const category = {
       title: data.title,
       description: data.description,
-      photo: img_url 
+      photo:img_url
     };
     console.log(category);
     axiosPublic.post("/category", category).then((res) => {
@@ -34,7 +34,7 @@ const CreativeCategory = () => {
       }
     });
     reset();
-}
+  }
   };
   return (
     <div>
