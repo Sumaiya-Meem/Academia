@@ -1,0 +1,19 @@
+[
+    {
+      "section_count": 5,
+      "lecture": 11,
+      "section": {
+        "milestone_name": "Milestone 1",
+        "module_name": ["Module 1","Module 2"]
+      }
+    },
+    {
+      "section_count": 5,
+      "lecture": 11,
+      "section": {
+        "milestone_name": "Milestone 2",
+        "module_name": ["Module 1","Module 2"]
+      }
+    }
+  ]
+  

@@ -9,6 +9,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { ImProfile } from "react-icons/im";
 import { GrTechnology } from "react-icons/gr";
 import logo from "../../../public/logo.png"
+import { GrBook } from "react-icons/gr";
 
 const Dashboard = () => {
   const { user } = useContext(ContextProvider);
@@ -45,6 +46,8 @@ const Dashboard = () => {
             <>
                 
                 <NavLink  to='/dashboard/adminHome'><div className='text-base items-center flex gap-1 py-2 lg:pl-10 md:pl-3 text-gray-200 border-y border-gray-600 capitalize font-semibold'><CgProfile /> Admin Home</div></NavLink>
+
+                <NavLink  to='/dashboard/popularCourse'><div className='text-base items-center flex gap-1 py-2 lg:pl-10 md:pl-3 text-gray-200 border-y border-gray-600 capitalize font-semibold'><GrBook /> Add Course</div></NavLink>
 
                 <NavLink  to='/dashboard/addTechnoloy'><div className='text-base items-center flex gap-1 py-2 lg:pl-10 md:pl-3 text-gray-200 border-y border-gray-600 capitalize font-semibold'><GrTechnology /> Add Technology</div></NavLink>
                 

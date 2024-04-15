@@ -11,6 +11,7 @@ import AdminProfile from "../DashboardPage/AdminPage/AdminProfile/AdminProfile";
 import AddTechnology from "../DashboardPage/AdminPage/AddTechnology/AddTechnology";
 import CreativeCategory from "../DashboardPage/AdminPage/CreativeCategory/CreativeCategory";
 import ErrorPage from "../Errorpage/ErrorPage";
+import AddCourse from "../DashboardPage/AdminPage/AddCourse/AddCourse";
 
 
 
@@ -48,6 +49,10 @@ import ErrorPage from "../Errorpage/ErrorPage";
         {
           path: 'adminProfile',
           element:<AdminProfile></AdminProfile>
+        },
+        {
+          path: 'popularCourse',
+          element:<AddCourse></AddCourse>
         },
         {
           path: 'addTechnoloy',
