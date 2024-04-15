@@ -15,6 +15,7 @@ const AddCourse = () => {
   } = useForm();
   const axiosPublic = useAxiosPublic();
   const totalLearn = watch("learn");
+  const total_instructor = watch("total_instructor");
 
   const onSubmit = async (data) => {
     // console.log(data);
@@ -42,7 +43,9 @@ const AddCourse = () => {
             price: data.price,
             offerPrice: data.offer_price,
             totalLearn: data.learn,
-            CourseLearn:[]
+            courseLearn:[],
+            total_instructor: data.total_instructor,
+            instructorName:[]
           };
       
           for (let i = 0; i < data.learn; i++) {
@@ -50,17 +53,25 @@ const AddCourse = () => {
                 courseLearn: data[`course_learn_${i}`],
             };
       
-            course.CourseLearn.push(section);
+            course.courseLearn.push(section);
+          }
+
+          for (let i = 0; i < data.total_instructor; i++) {
+            const ins_name= {
+                instructorName: data[`instructor_name_${i}`],
+            };
+      
+            course.instructorName.push(ins_name);
           }
       
           
       console.log(course)
-        //   axiosPublic.post("/", course).then((res) => {
-        //     if (res.data.acknowledged) {
-        //       toast.success("Course added successfully");
-        //       reset();
-        //     }
-        //   });
+          axiosPublic.post("/course", course).then((res) => {
+            if (res.data.acknowledged) {
+              toast.success("Course added successfully");
+              reset();
+            }
+          });
         }
       };
   return (
@@ -121,13 +132,12 @@ const AddCourse = () => {
         <div className="mb-4 grid grid-cols-3 gap-2">
           <div>
             <label
-              htmlFor="title"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
               Rating
             </label>
             <input
-              type="number"
+              type="text"
               id="rating"
               {...register("rating", {})}
               className="w-full border p-2 rounded focus:outline-none focus:ring focus:border-blue-300"
@@ -240,6 +250,37 @@ const AddCourse = () => {
           ))}
         </div>
 
+        <div className="mb-4">
+          <label
+            htmlFor="total_section"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Total Instructor
+          </label>
+          <input
+            type="number"
+            id="total_instructor"
+            {...register("total_instructor", {})}
+            className="w-full border p-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+          />
+        </div>
+
+        <div className="my-4">
+          {Array.from({ length: total_instructor}).map((_, index) => (
+            <div key={index} className="">
+              <div>
+                
+                <input
+                  type="text"
+                  id={`instructor_name_${index}`}
+                  {...register(`instructor_name_${index}`, {})}
+                  className="w-full border p-2 mb-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* <div className="mb-4">
           <label
             htmlFor="total_section"
@@ -340,7 +381,7 @@ const AddCourse = () => {
 
         <button
           type="submit"
-          className="bg-blue-800 text-white py-2 px-4 rounded hover:bg-blue-900 focus:outline-none focus:ring focus:border-blue-900"
+          className="bg-blue-800 text-white py-2 px-4  mb-5 rounded hover:bg-blue-900 focus:outline-none focus:ring focus:border-blue-900"
         >
           Add
         </button>
