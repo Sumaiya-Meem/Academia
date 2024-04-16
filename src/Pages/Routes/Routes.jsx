@@ -12,6 +12,7 @@ import AddTechnology from "../DashboardPage/AdminPage/AddTechnology/AddTechnolog
 import CreativeCategory from "../DashboardPage/AdminPage/CreativeCategory/CreativeCategory";
 import ErrorPage from "../Errorpage/ErrorPage";
 import AddCourse from "../DashboardPage/AdminPage/AddCourse/AddCourse";
+import SingleCourse from "../HomePage/PopularCourse/SingleCourse/SingleCourse";
 
 
 
@@ -26,7 +27,11 @@ import AddCourse from "../DashboardPage/AdminPage/AddCourse/AddCourse";
           path: "/",
           element:<Home></Home>,
         },
-       
+       {
+        path:"/detailCourse/:id",
+        element:<SingleCourse></SingleCourse>,
+        loader:({params})=>fetch(`http://localhost:5000/course/${params.id}`)
+       },
         {
           path: "/login",
           element: <Login></Login>, 

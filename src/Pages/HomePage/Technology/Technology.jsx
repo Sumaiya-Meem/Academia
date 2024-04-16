@@ -1,11 +1,12 @@
 
 import useTechnology from "../../../Hooks/useTechnology";
+import Loading from "../../Loading/Loading";
 
 const Technology = () => {
     const { technologys } = useTechnology();
 
     if (!technologys) {
-        return <div>Loading...</div>;
+        return <Loading></Loading>;
     }
 
     return (

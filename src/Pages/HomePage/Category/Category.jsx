@@ -1,10 +1,11 @@
 import useCategory from "../../../Hooks/useCategory";
+import Loading from "../../Loading/Loading";
 
 import "./Category.css";
 const Category = () => {
   const { category } = useCategory();
   if (!category) {
-    return <div>Loading...</div>;
+    return <Loading></Loading>;
   }
 
   const backgroundImageStyle = {
