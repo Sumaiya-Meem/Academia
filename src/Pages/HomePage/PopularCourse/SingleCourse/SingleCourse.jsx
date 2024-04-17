@@ -5,7 +5,7 @@ import { AiOutlineGlobal } from "react-icons/ai";
 import { MdTabletAndroid } from "react-icons/md";
 import { LiaInfinitySolid } from "react-icons/lia";
 import { LiaCertificateSolid } from "react-icons/lia";
-
+import { FaCheck } from "react-icons/fa6";
 import './course.css'
 const SingleCourse = () => {
   const loadedCourse = useLoaderData();
@@ -21,6 +21,7 @@ const SingleCourse = () => {
     photo,
     price,
     offerPrice,
+    courseLearn,
   } = loadedCourse;
 
   const filledStars = Math.round(parseFloat(rating));
@@ -136,8 +137,26 @@ const SingleCourse = () => {
       </Card>
 
       {/*  what they learn section*/}
-      <div>
-        <h1>What you'll learn</h1>
+      <div className="mt-10 mb-5 px-2 border-[1px] border-gray-400" style={{ width: 'calc(1024px - 384px)' }}>
+        <h1 className="font-bold text-xl"> What you'll learn</h1>
+        
+           <div className="grid grid-cols-1 lg:grid-cols-2 my-3">
+           
+           {
+            courseLearn && courseLearn.map((learn,index)=>(
+                <>
+                <div className="flex items-center gap-2">
+                <FaCheck></FaCheck>
+                <p key={index} >
+                    {learn.courseLearn}
+                </p>
+                </div>
+                </>
+            ))
+           }
+          
+           </div>
+       
       </div>
     </div>
   );
