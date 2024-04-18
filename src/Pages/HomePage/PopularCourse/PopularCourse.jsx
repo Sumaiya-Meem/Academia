@@ -11,17 +11,17 @@ const PopularCourse = () => {
     return <Loading></Loading>;
   }
   return (
-    <div className="my-10">
+    <div className="my-10 mx-5">
       {/* title section */}
-      <div className="flex items-center mb-16">
-        <div className="w-[400px] flex gap-7">
+      <div className="flex flex-col lg:flex-row items-center mb-16">
+        <div className="w-[400px] flex gap-7 mb-7 lg:mb-0">
           <div>
             <h1 className="text-xl font-semibold">Top Categories</h1>
             <h1 className="text-[40px] font-bold font-[Poppins]">
               Popular Courses
             </h1>
           </div>
-          <div className="bg-orange-400 w-[2px]"></div>
+          <div className="bg-orange-400 w-[2px] hidden lg:block"></div>
         </div>
         <div className="flex items-center justify-between flex-1">
           <p className="text-justify w-[60%]">
@@ -29,7 +29,7 @@ const PopularCourse = () => {
             in their fields, and unlock your full potential through knowledge
             and skill acquisition.
           </p>
-          <button className="animated-button uppercase bg-orange-400 px-4 py-3 text-white rounded-3xl font-serif">
+          <button className="mr-5 py-2 px-3 uppercase bg-[#0b648f] text-white rounded-3xl font-serif">
             View All Courses
           </button>
         </div>
@@ -39,11 +39,10 @@ const PopularCourse = () => {
         {courses.map((course, index) => (
           <div key={index} className="">
             <Card
-              className="max-w-sm h-[400px] shadow-md shadow-gray-500"
-              imgAlt=""
-              imgSrc={course.photo}
+              className="max-w-sm min-h-[400px] shadow-md shadow-gray-500"
               
             >
+              <img src={course.photo} alt="" className="h-[200px]"/>
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {course.title}
               </h5>
@@ -67,7 +66,7 @@ const PopularCourse = () => {
          </div></>
              }
              <Link to={`/detailCourse/${course._id}`}>
-              <Button className="w-full ">See more ...</Button>
+              <Button className="w-full text-2xl"><span className="text-lg">See more ...</span></Button>
             </Link>
             </Card>
           </div>

@@ -72,7 +72,7 @@ const Login = () => {
   return (
     <div style={backgroundImageStyle} className="w-full bg-gradient-to-r from-[#00000033] to-[#00000033] mt-0">
         <div className="flex items-center justify-center w-[100%] md:w-[60%] lg:w-[40%] mx-auto " >
-      <div className="mt-28 text-white p-2 w-full bg-gray-400 shadow-lg rounded-md bg-clip-padding backdrop-filter m-3 backdrop-blur-md bg-opacity-10 border border-gray-600">
+      <div className="mt-28 text-white p-2 w-full bg-gray-400 shadow-lg rounded-md bg-clip-padding backdrop-filter m-3 backdrop-blur-md bg-opacity-20 border border-gray-600">
  
    
         <form

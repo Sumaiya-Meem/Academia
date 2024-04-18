@@ -5,8 +5,10 @@ import toast from "react-hot-toast";
 import { CiLogin } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import {ContextProvider} from "../../Context/AuthProvider"
-
+import { IoCartOutline } from "react-icons/io5";
 import { useContext } from "react";
+import { IoMdNotificationsOutline } from "react-icons/io";
+
 
 
 
@@ -28,7 +30,7 @@ const Header = () => {
       <NavLink
         to="/"
         className={({ isActive, isPending }) =>
-          isPending ? "pending" : isActive ? "text-[#bc0024] font-bold menu   " : "text-white"
+          isPending ? "pending" : isActive ? "text-[#bc0024] font-bold menu   " : "text-black"
         }
       >
         Home
@@ -38,7 +40,7 @@ const Header = () => {
             <NavLink
         to="/dashboard/adminHome"
         className={({ isActive, isPending }) =>
-          isPending ? "pending" : isActive ? "text-[#bc0024] font-bold  " : "text-white"
+          isPending ? "pending" : isActive ? "text-[#bc0024] font-bold  " : "text-black"
         }
       >
        Dashboard
@@ -56,19 +58,21 @@ const Header = () => {
     return (
         <div>
 
-    <Navbar fluid rounded className="fixed bg-black z-10 bg-opacity-30 w-[1024px] text-white">
+    <Navbar fluid  className="fixed bg-[#fff] z-10 w-full shadow-md">
     <Navbar.Brand href="/">
           <div className="flex items-center ">
           {/* <img src={logo} className="mr-3 h-12" alt="Logo" /> */}
           <div className="flex flex-col text-[#bc0024]">
           <h1 className="font-serif text-xl text-center font-bold">Academia</h1>
-          {/* <h3 className="text-[18px] font-bold">Online Education & Learning</h3> */}
           </div>
           </div>
         </Navbar.Brand>
         <div className="flex md:order-2">
           {user ? 
             <>
+            <div className="flex items-center gap-5">
+            <IoCartOutline className="text-2xl font-bold text-black"></IoCartOutline>
+            <IoMdNotificationsOutline className="text-2xl font-bold text-black"></IoMdNotificationsOutline>
             <Dropdown
             arrowIcon={false}
             inline
@@ -90,6 +94,7 @@ const Header = () => {
         </Button>
             </Dropdown.Item>
         </Dropdown> 
+            </div>
             </>
            : (
             <>
@@ -99,12 +104,12 @@ const Header = () => {
                   isPending
                     ? "pending"
                     : isActive
-                    ? "text-[#348f54]"
-                    : "text-white"
+                    ? "text-[#bc0024]"
+                    : "text-black"
                 }
               >
                 <div className="flex items-center gap-1 font-semibold">
-                  <CiLogin className="text-xl text-white font-bold"></CiLogin><p className="text-xl text-white">Login</p>
+                  <CiLogin className="text-xl text-black font-bold"></CiLogin><p className="text-xl text-black">Login</p>
                 </div>
               </NavLink>
             </>

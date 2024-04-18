@@ -51,7 +51,7 @@ const SingleCourse = () => {
               </Rating>
             </div>
 
-            <div className="text-[#b674d3] underline">
+            <div className="text-[#c0c4fc] underline">
               <p>
                 (
                 {parseInt(totalRating) > 999
@@ -74,15 +74,15 @@ const SingleCourse = () => {
             <h1 className="text-white">Create by</h1>
             {instructorName &&
               instructorName.map((instructor, index) => (
-                <p key={index} className="text-[#b674d3] underline">
+                <p key={index} className="text-[#c0c4fc] underline">
                   {instructor.instructorName}
                 </p>
               ))}
           </div>
-          <div className="flex gap-4 text-white ">
+          <div className="flex gap-7 text-white ">
             <div className="flex items-center gap-2">
               <TbSettingsCheck></TbSettingsCheck>
-              {updateDate}
+              Last updated    <span className="ml-2">{updateDate}</span>
             </div>
             <div className="flex items-center gap-2">
               <AiOutlineGlobal></AiOutlineGlobal>
@@ -94,7 +94,7 @@ const SingleCourse = () => {
 
       {/* card */}
       <Card
-        className="absolute bg-fixed right-[13%] top-20 max-w-sm min-h-[400px] shadow-md shadow-gray-500"
+        className="absolute bg-fixed right-[4%] top-20 max-w-sm min-h-[400px] shadow-md shadow-gray-500"
         imgAlt=""
         imgSrc={photo}
       >
@@ -105,7 +105,7 @@ const SingleCourse = () => {
         ) : (
           <>
             <div className="flex gap-4 items-center">
-              <p className="font-bold text-xl">${offerPrice}</p>
+              <p className="font-bold text-2xl">${offerPrice}</p>
               <p className="font-bold text-gray-500">
                 <del>${price}</del>
               </p>
@@ -113,7 +113,7 @@ const SingleCourse = () => {
             </div>
           </>
         )}
-        <Button gradientDuoTone="purpleToPink" className="font-bold">Add to Cart</Button>
+        <Button className="font-bold bg-[#1a5878]">Add to Cart</Button>
         <Button outline gradientDuoTone="purpleToPink" className="font-bold ">
         <p className="buybtn ">Buy Now</p>
         </Button>
@@ -137,7 +137,7 @@ const SingleCourse = () => {
       </Card>
 
       {/*  what they learn section*/}
-      <div className="mt-10 mb-5 px-2 border-[1px] border-gray-400" style={{ width: 'calc(1024px - 384px)' }}>
+      <div className="mt-10 ml-3 mb-5 p-5 border-[1px] border-gray-400" style={{ width: 'calc(100vw - 415px)' }}>
         <h1 className="font-bold text-xl"> What you'll learn</h1>
         
            <div className="grid grid-cols-1 lg:grid-cols-2 my-3">

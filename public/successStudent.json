@@ -1,0 +1,38 @@
+[
+    {
+      "name": "Anika Rahman",
+      "img": "https://i.ibb.co/M2RqGPP/person1.jpg",
+      "profession": "Software Engineer",
+      "company_name": "Tech Solutions Ltd."
+    },
+    {
+      "name": "Rahat Islam",
+      "img": "https://i.ibb.co/4f7zgCS/userperson.jpg",
+      "profession": "Associate Software Engineer",
+      "company_name": "DataTech Innovations Inc."
+    },
+    {
+      "name": "Nadia Khan",
+      "img": "https://i.ibb.co/NKBxsTP/cafemoonperson.jpg",
+      "profession": "Full Stack Developer",
+      "company_name": "Code Wizards Co."
+    },
+    {
+      "name": "Imran Chowdhury",
+      "img": "./p5.png",
+      "profession": "Cybersecurity Analyst",
+      "company_name": "Secure Solutions Ltd."
+    },
+    {
+      "name": "Farzana Ahmed",
+      "img": "./p5.png",
+      "profession": "Backend Developer",
+      "company_name": "AI Innovations Co."
+    },
+    {
+      "name": "Riaz Hasan",
+      "img": "./p5.png",
+      "profession": "Software Engineer",
+      "company_name": "NodeTech Solutions Inc."
+    }
+  ]

@@ -9,10 +9,11 @@ const Category = () => {
   }
 
   const backgroundImageStyle = {
-    backgroundImage: `linear-gradient(rgba(5,10,35,0.75), rgba(5,10,35,0.75)), url('https://i.ibb.co/6rDbq6F/category.jpg)`,
+    backgroundImage: `linear-gradient(rgba(5,10,35,0.95), rgba(5,10,35,0.95)), url('https://i.ibb.co/6rDbq6F/category.jpg)`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     height: '200px',
+    
   };
 
 
@@ -21,7 +22,7 @@ const Category = () => {
         
       {/* cover section */}
       <div style={backgroundImageStyle} className="relative mb-20">
-      <div className="h-[200px] text-gray-300 font-serif flex flex-col items-center justify-center mt-10 bg-slate-500 bg-opacity-20">
+      <div className="h-[200px] text-gray-300 flex flex-col items-center justify-center mt-10 bg-slate-500 bg-opacity-20">
         <h1 className="text-3xl uppercase"> Creative Categories</h1>
         <h1 className="text-3xl uppercase mt-2"> For Students</h1>
         {/* <h4 className='capitalize '> {para}</h4> */}
@@ -40,7 +41,7 @@ const Category = () => {
               <h1 className="mt-16 text-center text-2xl font-semibold font-serif">
                 {data.title}
               </h1>
-              <p className="p-2 text-justify text-gray-700 text-sm">
+              <p className="p-2 text-justify font-semibold text-sm">
                 {data.description}
               </p>
             </div>

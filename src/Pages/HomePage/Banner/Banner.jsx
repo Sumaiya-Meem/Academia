@@ -19,7 +19,7 @@ const Banner = () => {
                 <br></br> community to unlock your full potential</p>
                
                <div className="flex gap-3 ">
-               <Button gradientDuoTone="redToYellow" className="uppercase">Get started</Button>
+               <Button  className="uppercase bg-purple-800">Get started</Button>
                 <Button gradientDuoTone="purpleToPink" className="uppercase">
         View Course
       </Button>
