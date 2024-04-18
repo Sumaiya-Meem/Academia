@@ -6,16 +6,38 @@ import { CiLogin } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import {ContextProvider} from "../../Context/AuthProvider"
 import { IoCartOutline } from "react-icons/io5";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
-
-
+import useAnnouncement from "../../../Hooks/useAnnouncement";
+import { IoNotifications } from "react-icons/io5";
 
 
 const Header = () => {
+
+  const {announcement}=useAnnouncement();
+  const [showAnnouncement, setShowAnnouncement] = useState(false);
   
   const { logOutUser, user } = useContext(ContextProvider);
 
+  const timeDifference = (date) => {
+    const currentDate = new Date();
+    const diffInMs = currentDate - new Date(date);
+
+    const seconds = Math.floor(diffInMs / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) {
+        return `${days} day${days > 1 ? 's' : ''} ago`;
+    } else if (hours > 0) {
+        return `${hours} hour${hours > 1 ? 's' : ''} ${minutes % 60} min ago`;
+    } else if (minutes > 0) {
+        return `${minutes} min ago`;
+    } else {
+        return 'just now';
+    }
+};
 
 
   const handleLogout = () => {
@@ -72,7 +94,34 @@ const Header = () => {
             <>
             <div className="flex items-center gap-5">
             <IoCartOutline className="text-2xl font-bold text-black"></IoCartOutline>
-            <IoMdNotificationsOutline className="text-2xl font-bold text-black"></IoMdNotificationsOutline>
+            <div className="relative">
+            <IoMdNotificationsOutline className="text-3xl font-bold text-black" onClick={()=>setShowAnnouncement(!showAnnouncement)}>
+
+            </IoMdNotificationsOutline>
+              <p className="absolute -right-1 -top-2 w-[18px] text-center bg-blue-500 rounded-[50%] text-white">{announcement.length}</p>
+               
+               {
+                showAnnouncement && (
+                  <div className="bg-white p-2 top-[45px] absolute w-[310px] right-0">
+                   {
+                    announcement.map((data)=>(
+                      <>
+                      <div className="flex gap-2">
+                      <div className="bg-fuchsia-600 text-white p-1 rounded-md h-[30px]">
+                      <IoNotifications  className="text-xl"></IoNotifications >
+                      </div>
+                      <div className="flex flex-col">
+                        <h1>{data.title}</h1>
+                        <p className="text-[12px] text-gray-700">{timeDifference(data.date)}</p>
+                      </div>
+                   </div>
+                      </>
+                    ))
+                   }
+               </div>
+                )
+               }
+            </div>
             <Dropdown
             arrowIcon={false}
             inline
