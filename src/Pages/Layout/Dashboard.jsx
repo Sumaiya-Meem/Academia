@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import "./Dashboard.css";
 import { CgProfile } from "react-icons/cg";
+import { GrAnnounce } from "react-icons/gr";
 import { BiCategoryAlt } from "react-icons/bi";
 import { NavLink} from "react-router-dom";
 import { FaHome} from "react-icons/fa";
@@ -52,6 +53,8 @@ const Dashboard = () => {
                 <NavLink  to='/dashboard/addTechnoloy'><div className='text-base items-center flex gap-1 py-2 lg:pl-10 md:pl-3 text-gray-200 border-y border-gray-600 capitalize font-semibold'><GrTechnology /> Add Technology</div></NavLink>
                 
                 <NavLink  to='/dashboard/addCreativeCatories'><div className='text-base items-center flex gap-1 py-2 lg:pl-10 md:pl-3 text-gray-200 border-y border-gray-600 capitalize font-semibold'><BiCategoryAlt/> Creative Category</div></NavLink>
+
+                <NavLink  to='/dashboard/makeAnnounce'><div className='text-base items-center flex gap-1 py-2 lg:pl-10 md:pl-3 text-gray-200 border-y border-gray-600 capitalize font-semibold'><GrAnnounce/>  Make Announcement</div></NavLink>
                 
                 <NavLink  to='/dashboard/adminProfile'><div className='text-base items-center flex gap-1 py-2 lg:pl-10 md:pl-3 text-gray-200 border-y border-gray-600 capitalize font-semibold'><ImProfile />Profile</div></NavLink>
                 

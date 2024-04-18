@@ -13,6 +13,7 @@ import CreativeCategory from "../DashboardPage/AdminPage/CreativeCategory/Creati
 import ErrorPage from "../Errorpage/ErrorPage";
 import AddCourse from "../DashboardPage/AdminPage/AddCourse/AddCourse";
 import SingleCourse from "../HomePage/PopularCourse/SingleCourse/SingleCourse";
+import MakeAnnounce from "../DashboardPage/AdminPage/MakeAnnounce/MakeAnnounce";
 
 
 
@@ -67,6 +68,10 @@ import SingleCourse from "../HomePage/PopularCourse/SingleCourse/SingleCourse";
         {
           path: 'addCreativeCatories',
           element:<CreativeCategory></CreativeCategory>
+        },
+        {
+          path: 'makeAnnounce',
+          element:<MakeAnnounce></MakeAnnounce>
         },
         
         
