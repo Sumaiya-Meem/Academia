@@ -22,7 +22,7 @@ const Category = () => {
         
       {/* cover section */}
       <div style={backgroundImageStyle} className="relative mb-20">
-      <div className="h-[200px] text-gray-300 flex flex-col items-center justify-center mt-10 bg-slate-500 bg-opacity-20">
+      <div className="h-[200px] text-white flex flex-col items-center justify-center mt-10 bg-slate-500 bg-opacity-20">
         <h1 className="text-3xl uppercase"> Creative Categories</h1>
         <h1 className="text-3xl uppercase mt-2"> For Students</h1>
         {/* <h4 className='capitalize '> {para}</h4> */}
