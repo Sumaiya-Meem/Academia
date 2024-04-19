@@ -6,15 +6,11 @@ const IMG_HOASTING_KEY = import.meta.env.VITE_IMAGE_UPLOAD_API;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${IMG_HOASTING_KEY}`;
 
 const AddCourse = () => {
-  const {
-    handleSubmit,
-    register,
-    reset,
-    formState: { errors },
-    watch,
-  } = useForm();
+  const {handleSubmit,register,reset,formState: { errors },watch,} = useForm();
+
   const axiosPublic = useAxiosPublic();
   const totalLearn = watch("learn");
+
   const total_instructor = watch("total_instructor");
 
   const onSubmit = async (data) => {
@@ -29,7 +25,7 @@ const AddCourse = () => {
     // console.log(res);
     const img_url = res?.data?.data?.display_url;
     // console.log(img_url);
-
+ 
 
     if (img_url) {
         const course = {
@@ -48,6 +44,14 @@ const AddCourse = () => {
             instructorName:[]
           };
       
+          for (let i = 0; i < data.total_instructor; i++) {
+            const ins_name= {
+                instructorName: data[`instructor_name_${i}`],
+            };
+      
+            course.instructorName.push(ins_name);
+          }
+
           for (let i = 0; i < data.learn; i++) {
             const section = {
                 courseLearn: data[`course_learn_${i}`],
@@ -56,13 +60,7 @@ const AddCourse = () => {
             course.courseLearn.push(section);
           }
 
-          for (let i = 0; i < data.total_instructor; i++) {
-            const ins_name= {
-                instructorName: data[`instructor_name_${i}`],
-            };
-      
-            course.instructorName.push(ins_name);
-          }
+          
       
           
       console.log(course)
@@ -99,7 +97,7 @@ const AddCourse = () => {
             htmlFor="title"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
-            Sub Title
+            Description
           </label>
           <input
             type="text"
@@ -148,7 +146,7 @@ const AddCourse = () => {
               htmlFor="title"
               className="block text-gray-700 text-sm font-bold mb-2"
             >
-              Total Rating
+              Total Review
             </label>
             <input
               type="number"
@@ -250,6 +248,9 @@ const AddCourse = () => {
           ))}
         </div>
 
+
+
+{/* Total Instructor */}
         <div className="mb-4">
           <label
             htmlFor="total_section"
@@ -269,13 +270,18 @@ const AddCourse = () => {
           {Array.from({ length: total_instructor}).map((_, index) => (
             <div key={index} className="">
               <div>
-                
+              <label
+            htmlFor="total_section"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Instructor{index+1} Name 
+          </label>
                 <input
                   type="text"
-                  id={`instructor_name_${index}`}
                   {...register(`instructor_name_${index}`, {})}
                   className="w-full border p-2 mb-2 rounded focus:outline-none focus:ring focus:border-blue-300"
-                />
+                  id={`instructor_name_${index}`}
+                 />
               </div>
             </div>
           ))}

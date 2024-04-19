@@ -23,13 +23,13 @@ const PopularCourse = () => {
           </div>
           <div className="bg-orange-400 w-[2px] hidden lg:block"></div>
         </div>
-        <div className="flex items-center justify-between flex-1">
+        <div className="flex items-center justify-between flex-col gap-2 lg:flex-row flex-1">
           <p className="text-justify w-[60%]">
             Dive into our comprehensive collection of courses taught by experts
             in their fields, and unlock your full potential through knowledge
             and skill acquisition.
           </p>
-          <button className="mr-5 py-2 px-3 uppercase bg-[#0b648f] text-white rounded-3xl font-serif">
+          <button className="mr-5 py-2 px-3 uppercase bg-blue-800 text-white rounded-3xl font-serif">
             View All Courses
           </button>
         </div>

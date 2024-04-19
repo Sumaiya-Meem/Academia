@@ -71,7 +71,7 @@ const SuccessStudent = () => {
 
    
         <div className="w-[85%] m-auto">
-        <Slider {...settings} style={{ margin: 0, padding: 0 }}>
+        <Slider {...settings} >
           {students.map((data) => (
             <>
               <div className="bg-white mx-2 my-10  h-[350px] rounded-xl max-w-[350px] border-[1px] ">
@@ -85,6 +85,12 @@ const SuccessStudent = () => {
             </>
           ))}
         </Slider>
+        </div>
+
+        <div className="flex justify-center mt-10">
+        <button className="mr-5 py-2 px-3 uppercase bg-blue-800 text-white rounded-3xl font-serif">
+            View More
+          </button>
         </div>
   
     </div>

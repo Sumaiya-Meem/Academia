@@ -33,11 +33,11 @@ const SingleCourse = () => {
     <div className="mt-0">
       <div className="pt-14">
         <div className="bg-gray-800 space-y-5 px-2 relative">
-          <h1 className="text-white font-bold mb-4  text-[35px] w-[50%] pt-4">
+          <h1 className="text-white font-bold mb-4 text-2xl lg:text-[35px] w-[50%] pt-4">
             {title}
           </h1>
           <p className="text-white w-[50%] ">{subTitle}</p>
-          <div className="grid grid-cols-3 gap-1 w-[40%]">
+          <div className="grid grid-cols-1 md:grid-cols-3 md:gap-20 gap-1 w-[40%]">
             <div className="text-orange-500 flex items-center gap-2 ">
               <p className="font-bold">{rating}</p>
 
@@ -57,7 +57,7 @@ const SingleCourse = () => {
                 {parseInt(totalRating) > 999
                   ? parseInt(totalRating).toLocaleString()
                   : totalRating}
-                <span className="ml-1">ratings</span>)
+                <span className="ml-1">review</span>)
               </p>
             </div>
             <div className="text-white">
@@ -94,13 +94,12 @@ const SingleCourse = () => {
 
       {/* card */}
       <Card
-        className="absolute bg-fixed right-[4%] top-20 max-w-sm min-h-[400px] shadow-md shadow-gray-500"
-        imgAlt=""
-        imgSrc={photo}
+        className="lg:absolute  lg:right-[4%] lg:top-20 lg:max-w-sm w-full min-h-[400px] shadow-md shadow-gray-500"
       >
+        <img src={photo} alt="" className="hidden lg:block" />
         {offerPrice == 0 ? (
           <>
-            <p className="font-bold text-xl">${price}</p>
+            <p className="font-bold text-3xl lg:text-xl">${price}</p>
           </>
         ) : (
           <>
@@ -137,7 +136,7 @@ const SingleCourse = () => {
       </Card>
 
       {/*  what they learn section*/}
-      <div className="mt-10 ml-3 mb-5 p-5 border-[1px] border-gray-400" style={{ width: 'calc(100vw - 415px)' }}>
+      <div className="learn mt-10 ml-3 mb-5 p-5 border-[1px] border-gray-400">
         <h1 className="font-bold text-xl"> What you'll learn</h1>
         
            <div className="grid grid-cols-1 lg:grid-cols-2 my-3">
