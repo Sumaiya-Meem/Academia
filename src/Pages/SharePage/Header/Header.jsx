@@ -95,7 +95,7 @@ const Header = () => {
             <div className="flex items-center gap-5">
             <IoCartOutline className="text-2xl font-bold text-black"></IoCartOutline>
             <div className="relative">
-            <IoMdNotificationsOutline className="text-3xl font-bold text-black" onClick={()=>setShowAnnouncement(!showAnnouncement)}>
+            <IoMdNotificationsOutline className="text-3xl font-bold text-black " style={{ cursor: 'pointer' }}  onClick={()=>setShowAnnouncement(!showAnnouncement)}>
 
             </IoMdNotificationsOutline>
               <p className="absolute -right-1 -top-2 w-[18px] text-center bg-blue-500 rounded-[50%] text-white">{announcement.length}</p>

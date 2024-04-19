@@ -34,5 +34,23 @@
       "img": "./p5.png",
       "profession": "Software Engineer",
       "company_name": "NodeTech Solutions Inc."
+    },
+    {
+      "name": "Tahmid Rahman",
+      "img": "./p5.png",
+      "profession": "Machine Learning Engineer",
+      "company_name": "TechSoft Solutions Ltd."
+    },
+    {
+      "name": "Sara Khan",
+      "img": "./p5.png",
+      "profession": "Data Scientist",
+      "company_name": "DataTech Innovations Inc."
+    },
+    {
+      "name": "Arif Hossain",
+      "img": "./p5.png",
+      "profession": "Frontend Developer",
+      "company_name": "Code Wizards Co."
     }
   ]

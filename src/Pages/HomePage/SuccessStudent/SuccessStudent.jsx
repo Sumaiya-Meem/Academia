@@ -12,10 +12,10 @@ const SuccessStudent = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToScroll: 1,
     initialSlide: 0,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 2000,
     cssEase: "linear",
     responsive: [
       {
@@ -70,6 +70,7 @@ const SuccessStudent = () => {
       </h1>
 
    
+        <div className="w-[85%] m-auto">
         <Slider {...settings} style={{ margin: 0, padding: 0 }}>
           {students.map((data) => (
             <>
@@ -84,6 +85,7 @@ const SuccessStudent = () => {
             </>
           ))}
         </Slider>
+        </div>
   
     </div>
   );
