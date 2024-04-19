@@ -12,8 +12,9 @@ const Home = () => {
            <Technology></Technology>
            
            <PopularCourse></PopularCourse>
-           <Category></Category>
            <SuccessStudent></SuccessStudent>
+           <Category></Category>
+           
         </div>
     );
 };

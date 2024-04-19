@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './succes.css'
+import { Link } from "react-router-dom";
 
 const SuccessStudent = () => {
 
@@ -54,7 +55,7 @@ const SuccessStudent = () => {
         "../../../../public/successStudent.json"
       );
       // console.log(response.data);
-      setStudents(response.data);
+      setStudents(response.data.slice(0, 10));
     };
 
     fetchData();
@@ -88,9 +89,11 @@ const SuccessStudent = () => {
         </div>
 
         <div className="flex justify-center mt-10">
-        <button className="mr-5 py-2 px-3 uppercase bg-blue-800 text-white rounded-3xl font-serif">
+       <Link to="/success-story">
+       <button className="mr-5 py-2 px-3 uppercase bg-blue-800 text-white rounded-3xl font-serif">
             View More
           </button>
+        </Link>
         </div>
   
     </div>

@@ -14,6 +14,7 @@ import ErrorPage from "../Errorpage/ErrorPage";
 import AddCourse from "../DashboardPage/AdminPage/AddCourse/AddCourse";
 import SingleCourse from "../HomePage/PopularCourse/SingleCourse/SingleCourse";
 import MakeAnnounce from "../DashboardPage/AdminPage/MakeAnnounce/MakeAnnounce";
+import AllSuccessStudent from "../HomePage/SuccessStudent/AllSuccessStudent";
 
 
 
@@ -33,6 +34,10 @@ import MakeAnnounce from "../DashboardPage/AdminPage/MakeAnnounce/MakeAnnounce";
         element:<SingleCourse></SingleCourse>,
         loader:({params})=>fetch(`http://localhost:5000/course/${params.id}`)
        },
+       {
+        path: "/success-story",
+        element:<AllSuccessStudent></AllSuccessStudent>, 
+      },
         {
           path: "/login",
           element: <Login></Login>, 

@@ -52,5 +52,35 @@
       "img": "./p5.png",
       "profession": "Frontend Developer",
       "company_name": "Code Wizards Co."
+    },
+    {
+      "name": "Ahmed Hassan",
+      "img": "./p5.png",
+      "profession": "UI/UX Designer",
+      "company_name": "Design Masters Inc."
+    },
+    {
+      "name": "Fatima Ali",
+      "img": "./p5.png",
+      "profession": "Product Manager",
+      "company_name": "Innovate Co."
+    },
+    {
+      "name": "Ali Khan",
+      "img": "./p5.png",
+      "profession": "DevOps Engineer",
+      "company_name": "TechOps Solutions Ltd."
+    },
+    {
+      "name": "Mariam Ahmed",
+      "img": "./p5.png",
+      "profession": "Software Developer",
+      "company_name": "TechGenius Inc."
+    },
+    {
+      "name": "Zainab Khan",
+      "img": "./p5.png",
+      "profession": "Database Administrator",
+      "company_name": "DataWorks Co."
     }
   ]
