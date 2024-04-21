@@ -15,6 +15,7 @@ import AddCourse from "../DashboardPage/AdminPage/AddCourse/AddCourse";
 import SingleCourse from "../HomePage/PopularCourse/SingleCourse/SingleCourse";
 import MakeAnnounce from "../DashboardPage/AdminPage/MakeAnnounce/MakeAnnounce";
 import AllSuccessStudent from "../HomePage/SuccessStudent/AllSuccessStudent";
+import AddInstuctor from "../DashboardPage/AdminPage/AddInstuctor/AddInstuctor";
 
 
 
@@ -64,6 +65,10 @@ import AllSuccessStudent from "../HomePage/SuccessStudent/AllSuccessStudent";
         {
           path: 'popularCourse',
           element:<AddCourse></AddCourse>
+        },
+        {
+          path: 'addInstuctor',
+          element:<AddInstuctor></AddInstuctor>
         },
         {
           path: 'addTechnoloy',
