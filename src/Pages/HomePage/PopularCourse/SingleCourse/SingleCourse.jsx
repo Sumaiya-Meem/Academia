@@ -122,7 +122,7 @@ const SingleCourse = () => {
       </div>
 
       {/* card */}
-      <Card className="lg:absolute  lg:right-[4%] lg:top-20 lg:max-w-sm w-full min-h-[400px] shadow-md shadow-gray-500">
+      <Card className=" lg:absolute  lg:right-[4%] lg:top-20 lg:max-w-sm w-full min-h-[400px] shadow-md shadow-gray-500">
         <img src={photo} alt="" className="hidden lg:block" />
         {offerPrice == 0 ? (
           <>
@@ -181,17 +181,17 @@ const SingleCourse = () => {
         </div>
       </div>
 
-      <div className="ml-3">
-        <h1 className="font-bold text-2xl ">Instructor</h1>
-        <div>
+      <div className=" lg:ml-3 w-[98%] lg:w-[50%]">
+        <h1 className="font-bold text-2xl  ml-3 lg:ml-0">Instructor</h1>
+        <div className="">
         {courseInstructors.length > 0
                 ? courseInstructors.map((instructor, index) => (
-                    <div key={index}>
-                      <h3 className="text-lg text-[#5624d0] font-bold">
+                    <div key={index} className="my-4">
+                      <h3 className="text-lg text-[#5624d0] font-bold ml-3 lg:ml-0">
                         {instructor.name}
                       </h3>
-                      <h1>{instructor.profession}</h1>
-                      <div className="flex gap-3 my-3 items-center">
+                      <h1 className="ml-3 lg:ml-0">{instructor.profession}</h1>
+                      <div className="flex gap-3 my-3 items-center ml-3 lg:ml-0">
                           <img src={instructor.instructorPhoto} alt=""  className="rounded-[50%] w-[100px] h-[100px]"/>
                           <div className="flex flex-col">
                                <div className="flex gap-2 items-center">
@@ -208,6 +208,7 @@ const SingleCourse = () => {
                                </div>
                           </div>
                       </div>
+                      <p className="text-justify">{instructor.description}</p>
                     </div>
                   ))
                 : " "}
