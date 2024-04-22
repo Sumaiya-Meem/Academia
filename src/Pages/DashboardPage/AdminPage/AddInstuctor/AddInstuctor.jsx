@@ -38,12 +38,12 @@ const AddInstuctor = () => {
       
           
       console.log(instructor)
-        //   axiosPublic.post("/course", course).then((res) => {
-        //     if (res.data.acknowledged) {
-        //       toast.success("Course added successfully");
-        //       reset();
-        //     }
-        //   });
+          axiosPublic.post("/instructor", instructor).then((res) => {
+            if (res.data.acknowledged) {
+              toast.success("Instructor added successfully");
+              reset();
+            }
+          });
         }
       };
 

@@ -5,10 +5,26 @@ import { AiOutlineGlobal } from "react-icons/ai";
 import { MdTabletAndroid } from "react-icons/md";
 import { LiaInfinitySolid } from "react-icons/lia";
 import { LiaCertificateSolid } from "react-icons/lia";
+import { FaUsers } from "react-icons/fa";
+import { FaPlayCircle } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
-import './course.css'
+import { FaCertificate } from "react-icons/fa6";
+import "./course.css";
+import useInstructor from "../../../../Hooks/useInstructor";
+import Loading from "../../../Loading/Loading";
+
 const SingleCourse = () => {
   const loadedCourse = useLoaderData();
+  const { instructors, isLoading } = useInstructor();
+
+  // const [instructor,setInstructor]=useState([]);
+  // console.log(instructor)
+
+  if (isLoading) {
+    <div>
+      <Loading></Loading>
+    </div>;
+  }
 
   const {
     title,
@@ -28,6 +44,14 @@ const SingleCourse = () => {
 
   const percentageDiscount = ((price - offerPrice) / price) * 100;
   const discount = Math.round(percentageDiscount);
+
+  // console.log(instructors)
+  // console.log(instructorName)
+
+  const courseInstructors = instructors.filter((instructor) =>
+    instructorName.some((data) => data.instructorName === instructor.name)
+  );
+  console.log(courseInstructors);
 
   return (
     <div className="mt-0">
@@ -72,17 +96,22 @@ const SingleCourse = () => {
 
           <div className="flex gap-4">
             <h1 className="text-white">Create by</h1>
-            {instructorName &&
-              instructorName.map((instructor, index) => (
-                <p key={index} className="text-[#c0c4fc] underline">
-                  {instructor.instructorName}
-                </p>
-              ))}
+            <div className=" text-white">
+              {courseInstructors.length > 0
+                ? courseInstructors.map((instructor, index) => (
+                    <div key={index}>
+                      <h3 className="underline text-[#c0c4fc]">
+                        {instructor.name}
+                      </h3>
+                    </div>
+                  ))
+                : " "}
+            </div>
           </div>
           <div className="flex gap-7 text-white ">
             <div className="flex items-center gap-2">
               <TbSettingsCheck></TbSettingsCheck>
-              Last updated    <span className="ml-2">{updateDate}</span>
+              Last updated <span className="ml-2">{updateDate}</span>
             </div>
             <div className="flex items-center gap-2">
               <AiOutlineGlobal></AiOutlineGlobal>
@@ -93,9 +122,7 @@ const SingleCourse = () => {
       </div>
 
       {/* card */}
-      <Card
-        className="lg:absolute  lg:right-[4%] lg:top-20 lg:max-w-sm w-full min-h-[400px] shadow-md shadow-gray-500"
-      >
+      <Card className="lg:absolute  lg:right-[4%] lg:top-20 lg:max-w-sm w-full min-h-[400px] shadow-md shadow-gray-500">
         <img src={photo} alt="" className="hidden lg:block" />
         {offerPrice == 0 ? (
           <>
@@ -108,54 +135,83 @@ const SingleCourse = () => {
               <p className="font-bold text-gray-500">
                 <del>${price}</del>
               </p>
-              <p><span className="font-bold">{discount}</span> % Off</p>
+              <p>
+                <span className="font-bold">{discount}</span> % Off
+              </p>
             </div>
           </>
         )}
         <Button className="font-bold bg-[#1a5878]">Add to Cart</Button>
         <Button outline gradientDuoTone="purpleToPink" className="font-bold ">
-        <p className="buybtn ">Buy Now</p>
+          <p className="buybtn ">Buy Now</p>
         </Button>
         <div>
-            <h1 className="font-bold">This course includes:</h1>
-            <div className="flex flex-col mt-2">
-                   <div className="flex gap-4 items-center">
-                     <MdTabletAndroid></MdTabletAndroid>
-                     Access on mobile and TV
-                   </div>
-                   <div className="flex gap-4 items-center">
-                     <LiaInfinitySolid></LiaInfinitySolid>
-                     Full lifetime access
-                   </div>
-                   <div className="flex gap-4 items-center">
-                     <LiaCertificateSolid className=""></LiaCertificateSolid>
-                     Certificate of completion
-                   </div>
+          <h1 className="font-bold">This course includes:</h1>
+          <div className="flex flex-col mt-2">
+            <div className="flex gap-4 items-center">
+              <MdTabletAndroid></MdTabletAndroid>
+              Access on mobile and TV
             </div>
+            <div className="flex gap-4 items-center">
+              <LiaInfinitySolid></LiaInfinitySolid>
+              Full lifetime access
+            </div>
+            <div className="flex gap-4 items-center">
+              <LiaCertificateSolid className=""></LiaCertificateSolid>
+              Certificate of completion
+            </div>
+          </div>
         </div>
       </Card>
 
       {/*  what they learn section*/}
       <div className="learn mt-10 ml-3 mb-5 p-5 border-[1px] border-gray-400">
         <h1 className="font-bold text-xl"> What you'll learn</h1>
-        
-           <div className="grid grid-cols-1 lg:grid-cols-2 my-3">
-           
-           {
-            courseLearn && courseLearn.map((learn,index)=>(
-                <>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 my-3">
+          {courseLearn &&
+            courseLearn.map((learn, index) => (
+              <>
                 <div className="flex items-center gap-2">
-                <FaCheck></FaCheck>
-                <p key={index} >
-                    {learn.courseLearn}
-                </p>
+                  <FaCheck></FaCheck>
+                  <p key={index}>{learn.courseLearn}</p>
                 </div>
-                </>
-            ))
-           }
-          
-           </div>
-       
+              </>
+            ))}
+        </div>
+      </div>
+
+      <div className="ml-3">
+        <h1 className="font-bold text-2xl ">Instructor</h1>
+        <div>
+        {courseInstructors.length > 0
+                ? courseInstructors.map((instructor, index) => (
+                    <div key={index}>
+                      <h3 className="text-lg text-[#5624d0] font-bold">
+                        {instructor.name}
+                      </h3>
+                      <h1>{instructor.profession}</h1>
+                      <div className="flex gap-3 my-3 items-center">
+                          <img src={instructor.instructorPhoto} alt=""  className="rounded-[50%] w-[100px] h-[100px]"/>
+                          <div className="flex flex-col">
+                               <div className="flex gap-2 items-center">
+                               <FaCertificate></FaCertificate>
+                               {instructor.totalreview} Reviews
+                               </div>
+                               <div className="flex gap-2 items-center">
+                               <FaUsers></FaUsers>
+                               {instructor.totalEnrollStudent} Students
+                               </div>
+                               <div className="flex gap-2 items-center">
+                               <FaPlayCircle></FaPlayCircle>
+                               {instructor.totalEnrollCourse} Courses
+                               </div>
+                          </div>
+                      </div>
+                    </div>
+                  ))
+                : " "}
+        </div>
       </div>
     </div>
   );
