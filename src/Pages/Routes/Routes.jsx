@@ -16,6 +16,7 @@ import SingleCourse from "../HomePage/PopularCourse/SingleCourse/SingleCourse";
 import MakeAnnounce from "../DashboardPage/AdminPage/MakeAnnounce/MakeAnnounce";
 import AllSuccessStudent from "../HomePage/SuccessStudent/AllSuccessStudent";
 import AddInstuctor from "../DashboardPage/AdminPage/AddInstuctor/AddInstuctor";
+import Payment from "../Payment/Payment";
 
 
 
@@ -47,6 +48,11 @@ import AddInstuctor from "../DashboardPage/AdminPage/AddInstuctor/AddInstuctor";
           path: "/registration",
           element: <Register></Register>, 
         },
+         // payment
+         {
+          path:'make-payment',
+          element:<Payment></Payment>
+        }
       ],
     },
     {
@@ -84,7 +90,7 @@ import AddInstuctor from "../DashboardPage/AdminPage/AddInstuctor/AddInstuctor";
           element:<MakeAnnounce></MakeAnnounce>
         },
         
-        
+       
     
     ]
   }

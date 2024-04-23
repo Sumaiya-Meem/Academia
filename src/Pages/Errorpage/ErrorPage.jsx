@@ -8,7 +8,7 @@ const ErrorPage = () => {
         <div className="flex flex-col justify-center items-center mt-5">
             <Lottie animationData={errorAnimation} loop={true} />
             <Link to="/">
-            <Button gradientDuoTone="redToYellow" className="mt-6">Go Back Home</Button>
+            <Button className="mt-6">Go Back Home</Button>
             </Link>
            
         </div>

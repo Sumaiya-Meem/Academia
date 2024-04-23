@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { Button, Card, Rating } from "flowbite-react";
 import { TbSettingsCheck } from "react-icons/tb";
 import { AiOutlineGlobal } from "react-icons/ai";
@@ -48,10 +48,10 @@ const SingleCourse = () => {
   // console.log(instructors)
   // console.log(instructorName)
 
-  const courseInstructors = instructors.filter((instructor) =>
-    instructorName.some((data) => data.instructorName === instructor.name)
-  );
-  console.log(courseInstructors);
+  // const courseInstructors = instructors.filter((instructor) =>
+  //   instructorName.some((data) => data.instructorName === instructor.name)
+  // );
+  // console.log(courseInstructors);
 
   return (
     <div className="mt-0">
@@ -96,8 +96,8 @@ const SingleCourse = () => {
 
           <div className="flex gap-4">
             <h1 className="text-white">Create by</h1>
-            <div className=" text-white">
-              {courseInstructors.length > 0
+            <div className=" text-white flex gap-3">
+              {/* {courseInstructors.length > 0
                 ? courseInstructors.map((instructor, index) => (
                     <div key={index}>
                       <h3 className="underline text-[#c0c4fc]">
@@ -105,7 +105,7 @@ const SingleCourse = () => {
                       </h3>
                     </div>
                   ))
-                : " "}
+                : " "} */}
             </div>
           </div>
           <div className="flex gap-7 text-white ">
@@ -142,9 +142,11 @@ const SingleCourse = () => {
           </>
         )}
         <Button className="font-bold bg-[#1a5878]">Add to Cart</Button>
-        <Button outline gradientDuoTone="purpleToPink" className="font-bold ">
+        <Link to="/make-payment">
+        <Button outline gradientDuoTone="purpleToPink" className="font-bold w-full">
           <p className="buybtn ">Buy Now</p>
         </Button>
+        </Link>
         <div>
           <h1 className="font-bold">This course includes:</h1>
           <div className="flex flex-col mt-2">
@@ -181,7 +183,7 @@ const SingleCourse = () => {
         </div>
       </div>
 
-      <div className=" lg:ml-3 w-[98%] lg:w-[50%]">
+      {/* <div className=" lg:ml-3 w-[98%] lg:w-[50%]">
         <h1 className="font-bold text-2xl  ml-3 lg:ml-0">Instructor</h1>
         <div className="">
         {courseInstructors.length > 0
@@ -213,7 +215,7 @@ const SingleCourse = () => {
                   ))
                 : " "}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
