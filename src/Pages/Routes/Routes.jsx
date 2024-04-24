@@ -17,6 +17,7 @@ import MakeAnnounce from "../DashboardPage/AdminPage/MakeAnnounce/MakeAnnounce";
 import AllSuccessStudent from "../HomePage/SuccessStudent/AllSuccessStudent";
 import AddInstuctor from "../DashboardPage/AdminPage/AddInstuctor/AddInstuctor";
 import Payment from "../Payment/Payment";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -51,7 +52,7 @@ import Payment from "../Payment/Payment";
          // payment
          {
           path:'make-payment',
-          element:<Payment></Payment>
+          element:<PrivateRoute><Payment></Payment></PrivateRoute>
         }
       ],
     },

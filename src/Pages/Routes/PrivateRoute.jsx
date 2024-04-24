@@ -2,6 +2,7 @@
 import { useContext } from "react";
 import { ContextProvider } from "../Context/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 
 const PrivateRoute = ({children}) => {
@@ -9,7 +10,7 @@ const PrivateRoute = ({children}) => {
     const location=useLocation();
 
     if(loading){
-        return <div className="flex justify-center items-center">Loading......</div>
+        return <div className=""><Loading></Loading></div>
     }
     if(user){
         return children;
