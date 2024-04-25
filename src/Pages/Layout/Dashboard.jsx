@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import { CgProfile } from "react-icons/cg";
 import { GrAnnounce } from "react-icons/gr";
 import { BiCategoryAlt } from "react-icons/bi";
+import { FaHistory } from "react-icons/fa";
 import { NavLink} from "react-router-dom";
 import { FaHome} from "react-icons/fa";
 import { ContextProvider } from "../Context/AuthProvider";
@@ -70,6 +71,10 @@ const Dashboard = () => {
 
                 <>
                   
+                  
+
+                    <NavLink to='/dashboard/payment-history'><div className='text-base items-center flex gap-1 py-2 lg:pl-10 md:pl-3 text-gray-200 border-b border-gray-600 uppercase font-semibold'><FaHistory /> Payment History</div></NavLink>
+
                     <NavLink to='/'><div className='text-base items-center flex gap-1 py-2 lg:pl-10 md:pl-3 text-gray-200 border-b border-gray-600 uppercase font-semibold'><FaHome /> Home</div></NavLink>
                 </>
 

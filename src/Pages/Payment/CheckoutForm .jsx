@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 // eslint-disable-next-line react/prop-types
 const CheckoutForm = ({ price,courseTitle}) => {
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   // const [transactionId, setTransactionId] = useState('');
 
@@ -49,10 +49,10 @@ useEffect(()=> {
 
     if (error) {
       console.log("[error]", error);
-      setError(error.message);
+      // setError(error.message);
     } else {
       console.log("payment method", paymentMethod);
-      setError(' ');
+      // setError(' ');
     }
 
     // confirm payment
@@ -68,7 +68,7 @@ useEffect(()=> {
 
    if(cardError){
     
-    setError(cardError.message)
+    // setError(cardError.message)
 }else{
     console.log('payment intent',paymentIntent);
      if(paymentIntent.status === 'succeeded'){
@@ -80,15 +80,15 @@ useEffect(()=> {
              transactionId: paymentIntent.id,
              date:formattedDate,
              courseTitle:courseTitle,
+             status:"pending",
              
          };
-         console.log(paymentInfo)
+        //  console.log(paymentInfo)
 
-    //  const res = await axiosPublic.post('payment', paymentInfo);
-    //  if(res.data.acknowledged){
-    //      toast.success('payment succeeded')
-    //  }
-    
+     const res = await axiosPublic.post('/payment', paymentInfo);
+     if(res?.data?.acknowledged){
+         toast.success('payment succeeded')
+     }
 
      }    
 }
@@ -124,7 +124,7 @@ useEffect(()=> {
         >
           Pay
         </button>
-        <p className='text-red-600'>{error}</p>
+        {/* <p className='text-red-600'>{error}</p> */}
         {/* {
             transactionId && <p className="text-green-500">Your transaction id : {transactionId}</p>
         } */}

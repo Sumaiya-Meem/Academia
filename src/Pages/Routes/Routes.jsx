@@ -18,6 +18,7 @@ import AllSuccessStudent from "../HomePage/SuccessStudent/AllSuccessStudent";
 import AddInstuctor from "../DashboardPage/AdminPage/AddInstuctor/AddInstuctor";
 import Payment from "../Payment/Payment";
 import PrivateRoute from "./PrivateRoute";
+import PaymentHistory from "../DashboardPage/UserPage/PaymentHistory";
 
 
 
@@ -91,7 +92,12 @@ import PrivateRoute from "./PrivateRoute";
           element:<MakeAnnounce></MakeAnnounce>
         },
         
-       
+      //  user 
+      
+      {
+        path: 'payment-history',
+        element:<PaymentHistory></PaymentHistory>
+      },
     
     ]
   }
