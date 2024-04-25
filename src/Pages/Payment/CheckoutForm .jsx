@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 const CheckoutForm = ({ price,courseTitle}) => {
   // const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
+  
   // const [transactionId, setTransactionId] = useState('');
 
   const currentDate = new Date();
