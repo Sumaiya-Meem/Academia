@@ -13,8 +13,8 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 
 
-const IMG_HOASTING_KEY = import.meta.env.VITE_IMAGE_UPLOAD_API;
-const img_hosting_api = `https://api.imgbb.com/1/upload?key=${IMG_HOASTING_KEY}`
+// const IMG_HOASTING_KEY = import.meta.env.VITE_IMAGE_UPLOAD_API;
+// const img_hosting_api = `https://api.imgbb.com/1/upload?key=${IMG_HOASTING_KEY}`
 
 const Register = () => {
 
@@ -27,25 +27,25 @@ const Register = () => {
 
 
     const onSubmit =async (data) => {
-        console.log(data);
-        const imgFile = { image: data.photo[0] }
-        console.log(imgFile)
-        const res = await axiosPublic.post(img_hosting_api, imgFile, {
-            headers: {
-                'Content-Type': "multipart/form-data"
-            }
-        })
-        console.log(res)
-        const img_url = res?.data?.data?.display_url;
-        console.log(img_url)
-        if(img_url){
+        // console.log(data);
+        // const imgFile = { image: data.photo[0] }
+        // console.log(imgFile)
+        // const res = await axiosPublic.post(img_hosting_api, imgFile, {
+        //     headers: {
+        //         'Content-Type': "multipart/form-data"
+        //     }
+        // })
+        // console.log(res)
+        // const img_url = res?.data?.data?.display_url;
+        // console.log(img_url)
+        // if(img_url){
             createUser(data.email, data.password)
             .then(result=> {
                 console.log(result.user)
                 if(result.user){
                      updateProfile(auth.currentUser, {
                         displayName: data.username,
-                        photoURL: img_url,
+                        // photoURL: img_url,
                      })
                      .then(()=> {
 
@@ -74,7 +74,7 @@ const Register = () => {
             .catch(error=> {
                 toast.error(error.message);
             })
-        }
+        // }
      }
     const backgroundImageStyle = {
         backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${bg})`,
@@ -130,7 +130,7 @@ const Register = () => {
                         {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
                     </div>
 
-                    <div className="mb-2">
+                    {/* <div className="mb-2">
                         <input
                             type="file"
                             id="photo"
@@ -138,7 +138,7 @@ const Register = () => {
                             className={`w-full p-2 block border rounded bg-transparent ${errors.password ? 'border-red-500' : 'border-gray-500'}`}
                         />
                         {errors.photo && <span className="text-red-500 text-sm">{errors.photo.message}</span>}
-                    </div>
+                    </div> */}
 
                     <div className="flex justify-between">
                         <button

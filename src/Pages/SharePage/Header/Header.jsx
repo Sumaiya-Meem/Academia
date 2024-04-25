@@ -1,5 +1,5 @@
 import { Avatar, Button, Dropdown, Navbar } from "flowbite-react";
-// import logo from "../../../../public/logo.png"
+import userImg from "../../../../public/userimage.png"
 import { Link, NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
 import { CiLogin } from "react-icons/ci";
@@ -126,7 +126,7 @@ const Header = () => {
             arrowIcon={false}
             inline
             label={
-                <Avatar alt="User settings" img={user?.photoURL} rounded />
+                <Avatar alt="User settings" img={userImg} rounded />
             }
         >
             <Dropdown.Header>

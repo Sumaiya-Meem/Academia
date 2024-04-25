@@ -142,8 +142,8 @@ const SingleCourse = () => {
           </>
         )}
         <Button className="font-bold bg-[#1a5878]">Add to Cart</Button>
-        <Link to="/make-payment">
-        <Button outline gradientDuoTone="purpleToPink" className="font-bold w-full">
+        <Link to="/make-payment" state={{ price: offerPrice > 0 ? offerPrice : price ,CourseTitle:title}}>
+        <Button outline gradientDuoTone="purpleToPink"    className="font-bold w-full">
           <p className="buybtn ">Buy Now</p>
         </Button>
         </Link>
