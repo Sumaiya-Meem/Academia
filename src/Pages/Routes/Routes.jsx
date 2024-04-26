@@ -37,7 +37,8 @@ import AllCourses from "../HomePage/PopularCourse/AllCourse/AllCourses";
        {
         path:"/detailCourse/:id",
         element:<SingleCourse></SingleCourse>,
-        loader:({params})=>fetch(`https://school-sphere-server-side.vercel.app/course/${params.id}`)
+        // loader:({params})=>fetch(`https://school-sphere-server-side.vercel.app/course/${params.id}`)
+        loader:({params})=>fetch(`http://localhost:5000/course/${params.id}`)
        },
        {
         path: "/success-story",

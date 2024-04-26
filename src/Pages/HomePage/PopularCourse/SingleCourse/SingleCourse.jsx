@@ -5,7 +5,7 @@ import { AiOutlineGlobal } from "react-icons/ai";
 import { MdTabletAndroid } from "react-icons/md";
 import { LiaInfinitySolid } from "react-icons/lia";
 import { LiaCertificateSolid } from "react-icons/lia";
-import { FaUsers } from "react-icons/fa";
+import toast from "react-hot-toast";
 import { FaPlayCircle } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
 import { MdPeople } from "react-icons/md";
@@ -14,15 +14,18 @@ import "./course.css";
 import useInstructor from "../../../../Hooks/useInstructor";
 import Loading from "../../../Loading/Loading";
 import usePaymentHistory from "../../../../Hooks/usePaymentHistory";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ContextProvider } from "../../../Context/AuthProvider";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 
 const SingleCourse = () => {
   const loadedCourse = useLoaderData();
   const { instructors, isLoading } = useInstructor();
+  const axiosPublic = useAxiosPublic();
 
   const {user}=useContext(ContextProvider);
   const {payments}=usePaymentHistory();
+  const [addCart,setAddCart]=useState(false);
 
   // const [instructor,setInstructor]=useState([]);
   // console.log(instructor)
@@ -46,6 +49,7 @@ const SingleCourse = () => {
     price,
     offerPrice,
     courseLearn,
+    _id,
   } = loadedCourse;
 
   const filledStars = Math.round(parseFloat(rating));
@@ -66,6 +70,29 @@ const SingleCourse = () => {
     instructorName.some((data) => data.instructorName === instructor.name)
   );
   console.log(courseInstructors);
+
+  const handleAddCart = (loadedCourse)=>{
+    console.log(loadedCourse);
+    const cartItem ={
+      email:user.email,
+      courseId:_id,
+      title,
+      price,
+      offerPrice,
+      photo,
+      rating,
+    totalRating,
+
+    }
+    axiosPublic.post("/carts", cartItem)
+    .then((res) => {
+      if (res.data.acknowledged) {
+        toast.success("course added to cart");
+        setAddCart(true);
+      }
+    });
+
+  }
 
   return (
     <div className="mt-0">
@@ -155,7 +182,16 @@ const SingleCourse = () => {
             </div>
           </>
         )}
-        <Button className="font-bold bg-[#1a5878]">Add to Cart</Button>
+        {
+          addCart ?
+          <>
+           <Button className="font-bold bg-[#1a5878]">Go to cart</Button>
+          </>
+          :
+          <>
+          <Button onClick={()=>handleAddCart(loadedCourse)} className="font-bold bg-[#1a5878]">Add to Cart</Button>
+          </>
+        }
         <Link to="/make-payment" state={{ price: offerPrice > 0 ? offerPrice : price ,CourseTitle:title}}>
         <Button outline  className="font-bold w-full">
           <p className="">{hasPurchased ? 'Continue Course' : 'Buy Now'}</p>
@@ -198,7 +234,7 @@ const SingleCourse = () => {
         </div>
       </div>
 
-      <div className=" lg:ml-3 w-[98%] lg:w-[50%]">
+      <div className=" lg:ml-3 w-[98%] lg:w-[50%] mt-10">
         <h1 className="font-bold text-2xl  ml-3 lg:ml-0">Instructor</h1>
         <div className="flex gap-20">
         {courseInstructors.length > 0
