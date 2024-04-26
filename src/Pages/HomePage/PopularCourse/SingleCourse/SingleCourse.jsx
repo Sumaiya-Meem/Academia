@@ -25,7 +25,7 @@ const SingleCourse = () => {
 
   const {user}=useContext(ContextProvider);
   const {payments}=usePaymentHistory();
-  const [addCart,setAddCart]=useState(false);
+  const [addCart,setAddCart]=useState(true);
 
   // const [instructor,setInstructor]=useState([]);
   // console.log(instructor)
@@ -88,7 +88,7 @@ const SingleCourse = () => {
     .then((res) => {
       if (res.data.acknowledged) {
         toast.success("course added to cart");
-        setAddCart(true);
+        setAddCart(false);
       }
     });
 
@@ -185,12 +185,14 @@ const SingleCourse = () => {
         {
           addCart ?
           <>
-           <Button className="font-bold bg-[#1a5878]">Go to cart</Button>
-          </>
-          :
-          <>
           <Button onClick={()=>handleAddCart(loadedCourse)} className="font-bold bg-[#1a5878]">Add to Cart</Button>
           </>
+          
+          :
+          <>
+           <Button className="font-bold bg-[#1a5878]">Go to cart</Button>
+          </>
+          
         }
         <Link to="/make-payment" state={{ price: offerPrice > 0 ? offerPrice : price ,CourseTitle:title}}>
         <Button outline  className="font-bold w-full">

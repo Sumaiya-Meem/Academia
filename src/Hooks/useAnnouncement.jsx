@@ -5,7 +5,7 @@ import useAxiosPublic from "./useAxiosPublic";
 const useAnnouncement = () => {
     const axiosSecure = useAxiosPublic();
 
-    const { data: announcement, refetch, isLoading, isError } = useQuery({
+    const { data: announcement=[], refetch, isLoading, isError } = useQuery({
         queryKey: ['announcement'],
         queryFn: async () => {
             const res = await axiosSecure.get('/announcement');

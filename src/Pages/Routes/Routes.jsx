@@ -20,6 +20,7 @@ import Payment from "../Payment/Payment";
 import PrivateRoute from "./PrivateRoute";
 import PaymentHistory from "../DashboardPage/UserPage/PaymentHistory";
 import AllCourses from "../HomePage/PopularCourse/AllCourse/AllCourses";
+import AllCartItem from "../AllCart/AllCartItem";
 
 
 
@@ -33,6 +34,10 @@ import AllCourses from "../HomePage/PopularCourse/AllCourse/AllCourses";
         {
           path: "/",
           element:<Home></Home>,
+        },
+        {
+          path: "/allCart",
+          element:<AllCartItem></AllCartItem>,
         },
        {
         path:"/detailCourse/:id",

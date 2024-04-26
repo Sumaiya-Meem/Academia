@@ -4,7 +4,7 @@ import useAxiosPublic from "./useAxiosPublic";
 const useCategory = () => {
     const axiosSecure = useAxiosPublic();
 
-    const { data: category, refetch, isLoading, isError } = useQuery({
+    const { data: category=[], refetch, isLoading, isError } = useQuery({
         queryKey: ['category'],
         queryFn: async () => {
             const res = await axiosSecure.get('/category');
