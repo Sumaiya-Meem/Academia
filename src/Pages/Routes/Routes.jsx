@@ -19,6 +19,7 @@ import AddInstuctor from "../DashboardPage/AdminPage/AddInstuctor/AddInstuctor";
 import Payment from "../Payment/Payment";
 import PrivateRoute from "./PrivateRoute";
 import PaymentHistory from "../DashboardPage/UserPage/PaymentHistory";
+import AllCourses from "../HomePage/PopularCourse/AllCourse/AllCourses";
 
 
 
@@ -36,11 +37,15 @@ import PaymentHistory from "../DashboardPage/UserPage/PaymentHistory";
        {
         path:"/detailCourse/:id",
         element:<SingleCourse></SingleCourse>,
-        loader:({params})=>fetch(`http://localhost:5000/course/${params.id}`)
+        loader:({params})=>fetch(`https://school-sphere-server-side.vercel.app/course/${params.id}`)
        },
        {
         path: "/success-story",
         element:<AllSuccessStudent></AllSuccessStudent>, 
+      },
+      {
+        path: "/allCourses",
+        element:<AllCourses></AllCourses>, 
       },
         {
           path: "/login",

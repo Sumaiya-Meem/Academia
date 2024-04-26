@@ -3,11 +3,14 @@ import { useContext, useEffect, useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { ContextProvider } from "../Context/AuthProvider";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
 
 // eslint-disable-next-line react/prop-types
 const CheckoutForm = ({ price,courseTitle}) => {
   // const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
+  const navigate = useNavigate();
   
   // const [transactionId, setTransactionId] = useState('');
 
@@ -92,6 +95,7 @@ useEffect(()=> {
      }
 
      }    
+     navigate("/dashboard/payment-history");
 }
 
 

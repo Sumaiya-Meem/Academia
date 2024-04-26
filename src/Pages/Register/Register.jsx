@@ -5,7 +5,7 @@ import {Link , useNavigate} from 'react-router-dom'
 
 import { ContextProvider } from "../Context/AuthProvider";
 
-import bg from "../../assets/login.avif";
+// import bg from "../../assets/login.avif";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase.config";
@@ -49,7 +49,7 @@ const Register = () => {
                      })
                      .then(()=> {
 
-                        axiosPublic.post('/users', {email: result?.user?.email, name: result?.user?.displayName,role: 'admin'})
+                        axiosPublic.post('/users', {email: result?.user?.email, name: result?.user?.displayName,role: 'user'})
                         .then(res=> {
                             if (res.data.insertedId) {
                                 console.log('user added to the database')
@@ -76,24 +76,32 @@ const Register = () => {
             })
         // }
      }
-    const backgroundImageStyle = {
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${bg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        height: "100vh",
-      };
+    // const backgroundImageStyle = {
+    //     backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${bg})`,
+    //     backgroundSize: "cover",
+    //     backgroundPosition: "center",
+    //     height: "100vh",
+    //   };
     
 
     return (
-        <div style={backgroundImageStyle} className="w-full bg-gradient-to-r from-[#00000033] to-[#00000033] mt-0">
+       
+        // <div style={backgroundImageStyle} className="w-full bg-gradient-to-r from-[#00000033] to-[#00000033] mt-0">
+        <div className="w-full">
         <div className="flex items-center justify-center w-[100%] md:w-[60%] lg:w-[40%] mx-auto " >
-      <div className="mt-28 text-white p-4 w-full bg-gray-400 shadow-lg rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-600">
+      <div className="mt-28 text-black p-4 w-full  shadow-lg rounded-md  border border-gray-200">
  
 
                 <form className="w-full " onSubmit={handleSubmit(onSubmit)}>
-                    <h2 className="text-2xl text-white font-bold mb-2 text-center">Registration Now</h2>
+                    <h2 className="text-2xl text-black font-bold mb-2 text-center">Registration Now</h2>
 
                     <div className="mb-2">
+                    <label
+              htmlFor="email"
+              className="block text-black text-sm font-bold mb-2"
+            >
+              Name
+            </label>
                         <input
                             type="text"
                             id="username"
@@ -105,7 +113,12 @@ const Register = () => {
                     </div>                   
 
                     <div className="mb-2">
-                      
+                    <label
+              htmlFor="email"
+              className="block text-black text-sm font-bold mb-2"
+            >
+              Email
+            </label>
                         <input
                             type="text"
                             id="email"
@@ -119,7 +132,12 @@ const Register = () => {
                     </div>
 
                     <div className="mb-2">
-                       
+                    <label
+              htmlFor="email"
+              className="block text-black text-sm font-bold mb-2"
+            >
+              Password
+            </label>
                         <input
                             type="password"
                             id="password"
@@ -143,12 +161,12 @@ const Register = () => {
                     <div className="flex justify-between">
                         <button
                             type="submit"
-                            className=" bg-blue-900 border border-gray-400  w-full rounded-md font-bold px-4 py-2 focus:outline-none focus:shadow-outline-blue"
+                            className=" bg-blue-900 border text-white border-gray-400  w-full rounded-md font-bold px-4 py-2 focus:outline-none focus:shadow-outline-blue"
                         >
                             Sing Up
                         </button>
                     </div>
-                    <h1 className="mt-2">Do You Have Any Account? <Link className="text-blue-400 font-bold underline" to='/login'>Login</Link></h1>
+                    <h1 className="mt-2 text-black">Do You Have Any Account? <Link className="text-blue-800 font-bold underline" to='/login'>Login</Link></h1>
                 </form>
 
 

@@ -12,10 +12,16 @@ import { FaCertificate } from "react-icons/fa6";
 import "./course.css";
 import useInstructor from "../../../../Hooks/useInstructor";
 import Loading from "../../../Loading/Loading";
+import usePaymentHistory from "../../../../Hooks/usePaymentHistory";
+import { useContext } from "react";
+import { ContextProvider } from "../../../Context/AuthProvider";
 
 const SingleCourse = () => {
   const loadedCourse = useLoaderData();
   const { instructors, isLoading } = useInstructor();
+
+  const {user}=useContext(ContextProvider);
+  const {payments}=usePaymentHistory();
 
   // const [instructor,setInstructor]=useState([]);
   // console.log(instructor)
@@ -25,6 +31,7 @@ const SingleCourse = () => {
       <Loading></Loading>
     </div>;
   }
+  
 
   const {
     title,
@@ -44,6 +51,12 @@ const SingleCourse = () => {
 
   const percentageDiscount = ((price - offerPrice) / price) * 100;
   const discount = Math.round(percentageDiscount);
+
+  const hasPurchased = payments.some(payment =>
+    payment.email === user.email && payment.courseTitle === title
+  );
+
+  console.log(hasPurchased)
 
   // console.log(instructors)
   // console.log(instructorName)
@@ -144,7 +157,8 @@ const SingleCourse = () => {
         <Button className="font-bold bg-[#1a5878]">Add to Cart</Button>
         <Link to="/make-payment" state={{ price: offerPrice > 0 ? offerPrice : price ,CourseTitle:title}}>
         <Button outline gradientDuoTone="purpleToPink"    className="font-bold w-full">
-          <p className="buybtn ">Buy Now</p>
+          <p className="">{hasPurchased ? 'Continue Course' : 'Buy Now'}</p>
+          
         </Button>
         </Link>
         <div>

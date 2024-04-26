@@ -29,9 +29,11 @@ const PopularCourse = () => {
             in their fields, and unlock your full potential through knowledge
             and skill acquisition.
           </p>
-          <button className="mr-5 py-2 px-3 uppercase bg-blue-800 text-white rounded-3xl font-serif">
+         <Link to="/allCourses">
+         <button className="mr-5 py-2 px-3 uppercase bg-blue-800 text-white rounded-3xl font-serif">
             View All Courses
           </button>
+         </Link>
         </div>
       </div>
 
@@ -39,13 +41,14 @@ const PopularCourse = () => {
         {courses.map((course, index) => (
           <div key={index} className="">
             <Card
-              className="max-w-sm min-h-[400px] shadow-md shadow-gray-500"
+              className="max-w-sm min-h-[450px] shadow-md shadow-gray-500"
               
             >
               <img src={course.photo} alt="" className="h-[200px]"/>
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {course.title}
               </h5>
+             <div className="">
              {
               course.offerPrice == 0 ? 
               <>
@@ -63,8 +66,10 @@ const PopularCourse = () => {
           <p className="font-bold text-gray-500">
             <del>${course.price}</del>
           </p>
-         </div></>
+         </div>
+         </>
              }
+             </div>
              <Link to={`/detailCourse/${course._id}`}>
               <Button className="w-full text-2xl"><span className="text-lg">See more ...</span></Button>
             </Link>

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import bg from "../../assets/login.avif"
+// import bg from "../../assets/login.avif"
 import { ContextProvider } from "../Context/AuthProvider";
 import { FcGoogle } from "react-icons/fc";
 
@@ -62,17 +62,19 @@ const Login = () => {
         toast.error(error.message);
       });
   };
-  const backgroundImageStyle = {
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${bg})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    height: "100vh",
-  };
+
+  // const backgroundImageStyle = {
+  //   backgroundImage: `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url(${bg})`,
+  //   backgroundSize: "cover",
+  //   backgroundPosition: "center",
+  //   height: "100vh",
+  // };
 
   return (
-    <div style={backgroundImageStyle} className="w-full bg-gradient-to-r from-[#00000033] to-[#00000033] mt-0">
+    // <div style={backgroundImageStyle} className="w-full bg-gradient-to-r from-[#00000033] to-[#00000033] mt-0">
+    <div className="w-full">
         <div className="flex items-center justify-center w-[100%] md:w-[60%] lg:w-[40%] mx-auto " >
-      <div className="mt-28 text-white p-2 w-full bg-gray-400 shadow-lg rounded-md bg-clip-padding backdrop-filter m-3 backdrop-blur-md bg-opacity-20 border border-gray-600">
+      <div className="mt-28 text-black p-2 w-full bg-gray-100 shadow-lg rounded-md bg-opacity-10 border border-gray-200">
  
    
         <form
@@ -84,7 +86,7 @@ const Login = () => {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-white text-sm font-bold mb-2"
+              className="block text-black text-sm font-bold mb-2"
             >
               Email
             </label>
@@ -108,7 +110,7 @@ const Login = () => {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block text-white text-sm font-bold mb-2"
+              className="block text-black text-sm font-bold mb-2"
             >
               Password
             </label>
@@ -130,7 +132,7 @@ const Login = () => {
           <div className="flex flex-col items-center gap-2 justify-between">
             <button
               type="submit"
-              className=" px-4 py-2 bg-blue-900 w-full rounded-md font-bold  focus:outline-none focus:shadow-outline-blue"
+              className="text-white px-4 py-2 bg-blue-900 w-full rounded-md font-bold  focus:outline-none focus:shadow-outline-blue"
             >
               Login
             </button>
@@ -139,7 +141,7 @@ const Login = () => {
             </div>
             <div
               onClick={handleGoogle}
-              className="w-full cursor-pointer text-center border bg-blue-900  px-4 py-2 rounded-full flex items-center justify-center gap-1 text-xl"
+              className="w-full  text-white cursor-pointer text-center border bg-blue-900  px-4 py-2 rounded-full flex items-center justify-center gap-1 text-xl"
             >
                 <p><FcGoogle></FcGoogle></p>
               <p>Google</p>
@@ -147,7 +149,7 @@ const Login = () => {
           </div>
           <h1 className="mt-5">
           {"Don't"} have any account ? 
-            <Link className="text-blue-400 underline ml-1" to="/registration">
+            <Link className="text-blue-800 underline ml-1" to="/registration">
                Registration
             </Link>
           </h1>
