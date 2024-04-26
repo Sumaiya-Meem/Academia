@@ -8,7 +8,8 @@ import { LiaCertificateSolid } from "react-icons/lia";
 import { FaUsers } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
-import { FaCertificate } from "react-icons/fa6";
+import { MdPeople } from "react-icons/md";
+import { IoMdStar } from "react-icons/io";
 import "./course.css";
 import useInstructor from "../../../../Hooks/useInstructor";
 import Loading from "../../../Loading/Loading";
@@ -52,7 +53,7 @@ const SingleCourse = () => {
   const percentageDiscount = ((price - offerPrice) / price) * 100;
   const discount = Math.round(percentageDiscount);
 
-  const hasPurchased = payments.some(payment =>
+  const hasPurchased = payments.find(payment =>
     payment.email === user.email && payment.courseTitle === title
   );
 
@@ -61,10 +62,10 @@ const SingleCourse = () => {
   // console.log(instructors)
   // console.log(instructorName)
 
-  // const courseInstructors = instructors.filter((instructor) =>
-  //   instructorName.some((data) => data.instructorName === instructor.name)
-  // );
-  // console.log(courseInstructors);
+  const courseInstructors = instructors.filter((instructor) =>
+    instructorName.some((data) => data.instructorName === instructor.name)
+  );
+  console.log(courseInstructors);
 
   return (
     <div className="mt-0">
@@ -110,7 +111,7 @@ const SingleCourse = () => {
           <div className="flex gap-4">
             <h1 className="text-white">Create by</h1>
             <div className=" text-white flex gap-3">
-              {/* {courseInstructors.length > 0
+              {courseInstructors.length > 0
                 ? courseInstructors.map((instructor, index) => (
                     <div key={index}>
                       <h3 className="underline text-[#c0c4fc]">
@@ -118,7 +119,7 @@ const SingleCourse = () => {
                       </h3>
                     </div>
                   ))
-                : " "} */}
+                : " "}
             </div>
           </div>
           <div className="flex gap-7 text-white ">
@@ -156,7 +157,7 @@ const SingleCourse = () => {
         )}
         <Button className="font-bold bg-[#1a5878]">Add to Cart</Button>
         <Link to="/make-payment" state={{ price: offerPrice > 0 ? offerPrice : price ,CourseTitle:title}}>
-        <Button outline gradientDuoTone="purpleToPink"    className="font-bold w-full">
+        <Button outline  className="font-bold w-full">
           <p className="">{hasPurchased ? 'Continue Course' : 'Buy Now'}</p>
           
         </Button>
@@ -197,9 +198,9 @@ const SingleCourse = () => {
         </div>
       </div>
 
-      {/* <div className=" lg:ml-3 w-[98%] lg:w-[50%]">
+      <div className=" lg:ml-3 w-[98%] lg:w-[50%]">
         <h1 className="font-bold text-2xl  ml-3 lg:ml-0">Instructor</h1>
-        <div className="">
+        <div className="flex gap-20">
         {courseInstructors.length > 0
                 ? courseInstructors.map((instructor, index) => (
                     <div key={index} className="my-4">
@@ -211,11 +212,11 @@ const SingleCourse = () => {
                           <img src={instructor.instructorPhoto} alt=""  className="rounded-[50%] w-[100px] h-[100px]"/>
                           <div className="flex flex-col">
                                <div className="flex gap-2 items-center">
-                               <FaCertificate></FaCertificate>
+                               <IoMdStar></IoMdStar>
                                {instructor.totalreview} Reviews
                                </div>
                                <div className="flex gap-2 items-center">
-                               <FaUsers></FaUsers>
+                               <MdPeople></MdPeople>
                                {instructor.totalEnrollStudent} Students
                                </div>
                                <div className="flex gap-2 items-center">
@@ -224,12 +225,12 @@ const SingleCourse = () => {
                                </div>
                           </div>
                       </div>
-                      <p className="text-justify">{instructor.description}</p>
+                      {/* <p className="text-justify">{instructor.description}</p> */}
                     </div>
                   ))
                 : " "}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

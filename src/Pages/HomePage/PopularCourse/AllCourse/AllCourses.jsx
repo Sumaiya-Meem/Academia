@@ -9,10 +9,10 @@ const AllCourses = () => {
     return <Loading></Loading>;
   }
     return (
-        <div>
+        <div className="mt-0">
                 <div className=" grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {courses.map((course, index) => (
-          <div key={index} className="">
+          <div key={index} className="mt-20 ml-2">
             <Card
               className="max-w-sm min-h-[450px] shadow-md shadow-gray-500"
               

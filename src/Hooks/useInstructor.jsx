@@ -5,7 +5,7 @@ import useAxiosPublic from "./useAxiosPublic";
 const useInstructor = () => {
     const axiosSecure = useAxiosPublic();
 
-    const { data: instructors, refetch, isLoading, isError } = useQuery({
+    const { data: instructors = [], refetch, isLoading, isError } = useQuery({
         queryKey: ['instructor'],
         queryFn: async () => {
             const res = await axiosSecure.get('/instructor');

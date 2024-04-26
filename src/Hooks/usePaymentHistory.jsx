@@ -10,7 +10,7 @@ const usePaymentHistory = () => {
         const axiosPublic= useAxiosPublic();
     
     
-        const {data : payments,isLoading, isError} = useQuery({
+        const {data : payments = [],isLoading, isError} = useQuery({
             queryKey: ['payment-history'],
             queryFn: async () => {
                 const res = await axiosPublic.get(`/payment/${user?.email}`)
