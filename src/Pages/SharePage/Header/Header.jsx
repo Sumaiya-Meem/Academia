@@ -6,7 +6,7 @@ import { CiLogin } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import { ContextProvider } from "../../Context/AuthProvider";
 import { IoCartOutline } from "react-icons/io5";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import useAnnouncement from "../../../Hooks/useAnnouncement";
 import { IoNotifications } from "react-icons/io5";
@@ -14,9 +14,9 @@ import useCart from "../../../Hooks/useCart";
 
 const Header = () => {
   const { announcement } = useAnnouncement();
-  const { carts } = useCart();
+  const [carts] = useCart();
   const [showAnnouncement, setShowAnnouncement] = useState(false);
-  const [matchedCartItem, setMatchedCartItem] = useState([]);
+  
 
   const { logOutUser, user } = useContext(ContextProvider);
 
@@ -46,13 +46,6 @@ const Header = () => {
     });
   };
 
-  useEffect(() => {
-  
-    if (carts && user) {
-        const res = carts.filter(data => data.email === user.email);
-        setMatchedCartItem(res);
-    }
-}, [carts,user]);
 
   const navItem = (
     <>
@@ -110,7 +103,7 @@ const Header = () => {
                     style={{ cursor: "pointer" }}
                   ></IoCartOutline>
                   <p className="absolute -right-2 -top-2 w-[18px] text-center bg-blue-800 rounded-[50%] text-white">
-                    {matchedCartItem.length}
+                    {carts.length}
                   </p>
                   </Link>
                 </div>

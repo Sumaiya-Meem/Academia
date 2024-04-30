@@ -17,6 +17,7 @@ import usePaymentHistory from "../../../../Hooks/usePaymentHistory";
 import { useContext, useState } from "react";
 import { ContextProvider } from "../../../Context/AuthProvider";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import useCart from "../../../../Hooks/useCart";
 
 const SingleCourse = () => {
   const loadedCourse = useLoaderData();
@@ -26,6 +27,7 @@ const SingleCourse = () => {
   const {user}=useContext(ContextProvider);
   const {payments}=usePaymentHistory();
   const [addCart,setAddCart]=useState(true);
+  const [,refetch]=useCart();
 
   // const [instructor,setInstructor]=useState([]);
   // console.log(instructor)
@@ -61,10 +63,8 @@ const SingleCourse = () => {
     payment.email === user.email && payment.courseTitle === title
   );
 
-  console.log(hasPurchased)
+  // console.log(hasPurchased)
 
-  // console.log(instructors)
-  // console.log(instructorName)
 
   const courseInstructors = instructors.filter((instructor) =>
     instructorName.some((data) => data.instructorName === instructor.name)
@@ -86,9 +86,11 @@ const SingleCourse = () => {
     }
     axiosPublic.post("/carts", cartItem)
     .then((res) => {
-      if (res.data.acknowledged) {
+      if (res.data.insertedId) {
         toast.success("course added to cart");
         setAddCart(false);
+        refetch();
+
       }
     });
 

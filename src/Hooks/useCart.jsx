@@ -12,7 +12,7 @@ const useCart = () => {
         }
     });
 
-    return { carts, refetch, isLoading, isError };
+    return [ carts, refetch, isLoading, isError ];
 };
 
 export default useCart;
