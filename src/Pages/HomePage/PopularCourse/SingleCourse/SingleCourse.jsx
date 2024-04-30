@@ -102,7 +102,7 @@ const SingleCourse = () => {
             {title}
           </h1>
           <p className="text-white w-[50%] ">{subTitle}</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 md:gap-20 gap-1 w-[40%]">
+          <div className="grid grid-cols-1 md:grid-cols-3 md:gap-20 lg:gap-1 w-[35%]">
             <div className="text-orange-500 flex items-center gap-2 ">
               <p className="font-bold">{rating}</p>
 
@@ -185,12 +185,12 @@ const SingleCourse = () => {
         {
           addCart ?
           <>
-          <Button onClick={()=>handleAddCart(loadedCourse)} className="font-bold bg-[#1a5878]">Add to Cart</Button>
+          <Button onClick={()=>handleAddCart(loadedCourse)} className="font-bold w-full bg-[#1a5878]">Add to Cart</Button>
           </>
           
           :
           <>
-           <Button className="font-bold bg-[#1a5878]">Go to cart</Button>
+           <Link to="/allCart"><Button className="font-bold w-full bg-[#1a5878]">Go to cart</Button></Link>
           </>
           
         }
@@ -238,7 +238,7 @@ const SingleCourse = () => {
 
       <div className=" lg:ml-3 w-[98%] lg:w-[50%] mt-10">
         <h1 className="font-bold text-2xl  ml-3 lg:ml-0">Instructor</h1>
-        <div className="flex gap-20">
+        <div className="flex flex-col md:flex-row md:gap-20 ">
         {courseInstructors.length > 0
                 ? courseInstructors.map((instructor, index) => (
                     <div key={index} className="my-4">
