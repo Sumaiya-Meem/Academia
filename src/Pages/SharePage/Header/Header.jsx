@@ -102,7 +102,7 @@ const Header = () => {
                     className="text-2xl font-bold text-black"
                     style={{ cursor: "pointer" }}
                   ></IoCartOutline>
-                  <p className="absolute -right-2 -top-2 w-[18px] text-center bg-blue-800 rounded-[50%] text-white">
+                  <p className="absolute -right-2 -top-2 w-[18px] text-center bg-[#a435f0] rounded-[50%] text-white">
                     {carts.length}
                   </p>
                   </Link>

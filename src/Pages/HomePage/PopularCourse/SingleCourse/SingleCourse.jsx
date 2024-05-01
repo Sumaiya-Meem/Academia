@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from "react-router-dom";
-import { Button, Card, Rating } from "flowbite-react";
+import { Card, Rating } from "flowbite-react";
 import { TbSettingsCheck } from "react-icons/tb";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { MdTabletAndroid } from "react-icons/md";
@@ -14,7 +14,7 @@ import "./course.css";
 import useInstructor from "../../../../Hooks/useInstructor";
 import Loading from "../../../Loading/Loading";
 import usePaymentHistory from "../../../../Hooks/usePaymentHistory";
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import { ContextProvider } from "../../../Context/AuthProvider";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import useCart from "../../../../Hooks/useCart";
@@ -26,8 +26,8 @@ const SingleCourse = () => {
 
   const {user}=useContext(ContextProvider);
   const {payments}=usePaymentHistory();
-  const [addCart,setAddCart]=useState(true);
-  const [,refetch]=useCart();
+  const [carts,refetch]=useCart();
+  // const [addedCart,setAddedCart]=useState(false);
 
   // const [instructor,setInstructor]=useState([]);
   // console.log(instructor)
@@ -38,6 +38,7 @@ const SingleCourse = () => {
     </div>;
   }
   
+
 
   const {
     title,
@@ -69,7 +70,9 @@ const SingleCourse = () => {
   const courseInstructors = instructors.filter((instructor) =>
     instructorName.some((data) => data.instructorName === instructor.name)
   );
-  console.log(courseInstructors);
+  // console.log(courseInstructors);
+
+  const addedCart = carts.find(cart=>cart.courseId==_id);
 
   const handleAddCart = (loadedCourse)=>{
     console.log(loadedCourse);
@@ -88,7 +91,6 @@ const SingleCourse = () => {
     .then((res) => {
       if (res.data.insertedId) {
         toast.success("course added to cart");
-        setAddCart(false);
         refetch();
 
       }
@@ -185,22 +187,23 @@ const SingleCourse = () => {
           </>
         )}
         {
-          addCart ?
+          addedCart ?
           <>
-          <Button onClick={()=>handleAddCart(loadedCourse)} className="font-bold w-full bg-[#1a5878]">Add to Cart</Button>
+          <Link to="/allCart"><button className="font-bold w-full bg-[#a945ec] text-white p-2">Go to cart</button></Link>
+        
           </>
           
           :
           <>
-           <Link to="/allCart"><Button className="font-bold w-full bg-[#1a5878]">Go to cart</Button></Link>
+             <button onClick={()=>handleAddCart(loadedCourse)} className="font-bold w-full bg-[#a945ec]  text-white p-2">Add to Cart</button>
           </>
           
         }
         <Link to="/make-payment" state={{ price: offerPrice > 0 ? offerPrice : price ,CourseTitle:title}}>
-        <Button outline  className="font-bold w-full">
+        <button  className="font-bold w-full border border-[#a945ec] p-2">
           <p className="">{hasPurchased ? 'Continue Course' : 'Buy Now'}</p>
           
-        </Button>
+        </button>
         </Link>
         <div>
           <h1 className="font-bold">This course includes:</h1>
@@ -223,7 +226,7 @@ const SingleCourse = () => {
 
       {/*  what they learn section*/}
       <div className="learn mt-10 ml-3 mb-5 p-5 border-[1px] border-gray-400">
-        <h1 className="font-bold text-xl"> What you'll learn</h1>
+        <h1 className="font-bold text-xl"> What you will learn</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 my-3">
           {courseLearn &&
