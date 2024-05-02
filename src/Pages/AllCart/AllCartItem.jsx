@@ -48,6 +48,9 @@ const AllCartItem = () => {
   const percentageDiscount = ((originalPrice - totalPrice) / originalPrice) * 100;
   const discount = Math.round(percentageDiscount);
 
+  const courseTitles = carts.map(item => item.title);
+
+
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -214,7 +217,7 @@ const AllCartItem = () => {
             <h1 className="text-[40px] font-bold">${totalPrice}.00</h1>
             <del><h1 className="">${originalPrice}.00</h1></del>
             <h1>{discount}% off</h1>
-            <Link to="/make-payment" state={{ price: totalPrice }}>
+            <Link to="/make-payment" state={{ price: totalPrice,CourseTitle: courseTitles}}>
                 <button className="bg-[#a435f0] text-white w-[98%] p-2 mt-3 font-semibold text-lg">
                     Checkout</button>
             </Link>

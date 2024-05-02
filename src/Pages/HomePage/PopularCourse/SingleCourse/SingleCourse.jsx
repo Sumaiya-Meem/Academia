@@ -74,8 +74,8 @@ const SingleCourse = () => {
 
   const addedCart = carts.find(cart=>cart.courseId==_id);
 
-  const handleAddCart = (loadedCourse)=>{
-    console.log(loadedCourse);
+  const handleAddCart = ()=>{
+    // console.log(loadedCourse);
     const cartItem ={
       email:user.email,
       courseId:_id,

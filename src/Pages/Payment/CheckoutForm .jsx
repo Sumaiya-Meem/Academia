@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const CheckoutForm = ({ price,courseTitle}) => {
+  console.log('checkout page:',price,courseTitle);
   // const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const navigate = useNavigate();
