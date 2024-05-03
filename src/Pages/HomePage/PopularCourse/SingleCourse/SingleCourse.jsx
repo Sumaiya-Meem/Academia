@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from "react-router-dom";
-import { Card, Rating } from "flowbite-react";
+import { Accordion, Card, Modal, Rating } from "flowbite-react";
 import { TbSettingsCheck } from "react-icons/tb";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { MdTabletAndroid } from "react-icons/md";
@@ -14,18 +14,20 @@ import "./course.css";
 import useInstructor from "../../../../Hooks/useInstructor";
 import Loading from "../../../Loading/Loading";
 import usePaymentHistory from "../../../../Hooks/usePaymentHistory";
-import { useContext} from "react";
+import { useContext, useState} from "react";
 import { ContextProvider } from "../../../Context/AuthProvider";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import useCart from "../../../../Hooks/useCart";
+import { PiVideoBold } from "react-icons/pi";
 
 const SingleCourse = () => {
   const loadedCourse = useLoaderData();
-  const { instructors, isLoading } = useInstructor();
+  const[instructors, isLoading]= useInstructor();
   const axiosPublic = useAxiosPublic();
+  
 
   const {user}=useContext(ContextProvider);
-  const {payments}=usePaymentHistory();
+  const [payments]=usePaymentHistory();
   const [carts,refetch]=useCart();
   // const [addedCart,setAddedCart]=useState(false);
 
@@ -52,6 +54,7 @@ const SingleCourse = () => {
     price,
     offerPrice,
     courseLearn,
+    courseContent,
     _id,
   } = loadedCourse;
 
@@ -61,7 +64,7 @@ const SingleCourse = () => {
   const discount = Math.round(percentageDiscount);
 
   const hasPurchased = payments.find(payment =>
-    payment.email === user.email && payment.courseTitle === title
+    payment.email === user.email && payment.courseTitle.includes(title)
   );
 
   // console.log(hasPurchased)
@@ -98,6 +101,20 @@ const SingleCourse = () => {
 
   }
 
+
+
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedData, setSelectedData] = useState(null);
+
+  const handleVideoOpen = (data) => {
+    console.log("Opening video for data:", data);
+    if (hasPurchased) {
+      setSelectedData(data); // Set the selected course content
+      setOpenModal(true);
+    } else {
+      toast.error("Please purchase the course to access the video.");
+    }
+  }
   return (
     <div className="mt-0">
       <div className="pt-14">
@@ -142,7 +159,7 @@ const SingleCourse = () => {
           <div className="flex gap-4">
             <h1 className="text-white">Create by</h1>
             <div className=" text-white flex gap-3">
-              {courseInstructors.length > 0
+              {courseInstructors.length >= 0
                 ? courseInstructors.map((instructor, index) => (
                     <div key={index}>
                       <h3 className="underline text-[#c0c4fc]">
@@ -240,6 +257,36 @@ const SingleCourse = () => {
             ))}
         </div>
       </div>
+
+      {/* course content */}
+      <div className="learn lg:ml-3">
+      <h1 className="font-bold text-xl my-4">Course Content</h1>
+      {courseContent.map((data, index) => (
+        <Accordion key={index}>
+          <Accordion.Panel>
+            <Accordion.Title className="font-bold">{data.title}</Accordion.Title>
+            <Accordion.Content>
+              <button onClick={() => handleVideoOpen(data)} className="flex items-center gap-2">
+                <PiVideoBold className="mt-1" />
+                <span >{data.subtitle}</span>
+              </button>
+            </Accordion.Content>
+          </Accordion.Panel>
+        </Accordion>
+      ))}
+
+      {openModal && (
+        <Modal show={openModal} onClose={() => setOpenModal(false)}>
+          <Modal.Header>Video Tutorial</Modal.Header>
+          <Modal.Body>
+            <div dangerouslySetInnerHTML={{ __html: selectedData?.video }} />
+          </Modal.Body>
+        </Modal>
+      )}
+      </div>
+
+      
+      {/* instructor */}
 
       <div className=" lg:ml-3 w-[98%] lg:w-[50%] mt-10">
         <h1 className="font-bold text-2xl  ml-3 lg:ml-0">Instructor</h1>

@@ -13,7 +13,7 @@ const useInstructor = () => {
         }
     });
 
-    return { instructors, refetch, isLoading, isError };
+    return [ instructors, refetch, isLoading, isError ];
 };
 
 export default useInstructor;

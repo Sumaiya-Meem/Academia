@@ -17,7 +17,7 @@ const usePaymentHistory = () => {
                 return res.data;
             }
         });
-        return { payments, isLoading, isError };
+        return [ payments, isLoading, isError ];
 };
 
 export default usePaymentHistory;

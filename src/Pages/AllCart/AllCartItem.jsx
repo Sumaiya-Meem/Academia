@@ -16,7 +16,7 @@ const AllCartItem = () => {
   const [carts, refetch, isLoading] = useCart();
   const [saveItems,saveRefetch] = useSaveItem();
   const axiosPublic = useAxiosPublic();
-  const { payments } = usePaymentHistory();
+  const [payments ] = usePaymentHistory();
   const {user}=useContext(ContextProvider);
 
   if (isLoading) {
@@ -25,7 +25,7 @@ const AllCartItem = () => {
 
 
   const isEnrolled = (title) => {
-    return payments.find(payment => payment.courseTitle === title);
+    return payments.find(payment => payment.courseTitle.includes(title));
   };
  
 
@@ -216,7 +216,10 @@ const AllCartItem = () => {
             <h1 className="text-xl font-semibold lg:-mt-5">Total:</h1>
             <h1 className="text-[40px] font-bold">${totalPrice}.00</h1>
             <del><h1 className="">${originalPrice}.00</h1></del>
-            <h1>{discount}% off</h1>
+            {
+                discount >0 ?
+                <><h1>{discount}% off</h1></>:<></>
+            }
             <Link to="/make-payment" state={{ price: totalPrice,CourseTitle: courseTitles}}>
                 <button className="bg-[#a435f0] text-white w-[98%] p-2 mt-3 font-semibold text-lg">
                     Checkout</button>

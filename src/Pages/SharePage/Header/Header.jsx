@@ -61,6 +61,18 @@ const Header = () => {
       >
         Home
       </NavLink>
+      <NavLink
+        to="/allCourses"
+        className={({ isActive, isPending }) =>
+          isPending
+            ? "pending"
+            : isActive
+            ? "text-blue-600 font-bold menu   "
+            : "text-black"
+        }
+      >
+        All Course
+      </NavLink>
       {user ? (
         <NavLink
           to="/dashboard/adminHome"
@@ -114,7 +126,7 @@ const Header = () => {
                     onClick={() => setShowAnnouncement(!showAnnouncement)}
                   ></IoMdNotificationsOutline>
                   <p className="absolute -right-1 -top-2 w-[18px] text-center bg-blue-500 rounded-[50%] text-white">
-                    {announcement.length}
+                    {/* {announcement.length} */}
                   </p>
 
                   {showAnnouncement && (

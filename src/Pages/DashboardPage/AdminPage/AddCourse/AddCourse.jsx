@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import { Label, Select } from "flowbite-react";
+
 
 const IMG_HOASTING_KEY = import.meta.env.VITE_IMAGE_UPLOAD_API;
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=${IMG_HOASTING_KEY}`;
@@ -10,6 +12,7 @@ const AddCourse = () => {
 
   const axiosPublic = useAxiosPublic();
   const totalLearn = watch("learn");
+  const totalCourseContent = watch("total_courseContent");
 
   const total_instructor = watch("total_instructor");
 
@@ -28,50 +31,57 @@ const AddCourse = () => {
  
 
     if (img_url) {
-        const course = {
-            title: data.title,
-            subTitle: data.subTitle,
-            photo: img_url,
-            rating: data.rating,
-            totalRating: data.total_rating,
-            totalEnrollStudent: data.total_student,
-            updateDate: data.updateDate,
-            price: data.price,
-            offerPrice: data.offer_price,
-            totalLearn: data.learn,
-            courseLearn:[],
-            total_instructor: data.total_instructor,
-            instructorName:[]
-          };
-      
-          for (let i = 0; i < data.total_instructor; i++) {
-            const ins_name= {
-                instructorName: data[`instructor_name_${i}`],
-            };
-      
-            course.instructorName.push(ins_name);
-          }
-
-          for (let i = 0; i < data.learn; i++) {
-            const section = {
-                courseLearn: data[`course_learn_${i}`],
-            };
-      
-            course.courseLearn.push(section);
-          }
-
-          
-      
-          
-      console.log(course)
-          axiosPublic.post("/course", course).then((res) => {
-            if (res.data.acknowledged) {
-              toast.success("Course added successfully");
-              reset();
-            }
-          });
-        }
+      const course = {
+        title: data.title,
+        subTitle: data.subTitle,
+        photo: img_url,
+        rating: data.rating,
+        totalRating: data.total_rating,
+        totalEnrollStudent: data.total_student,
+        updateDate: data.updateDate,
+        price: data.price,
+        offerPrice: data.offer_price,
+        totalLearn: data.learn,
+        courseLearn: [],
+        total_instructor: data.total_instructor,
+        instructorName: [],
+        category: data.category,
+        courseContent: [] 
       };
+  
+      // Instructors
+      for (let i = 0; i < data.total_instructor; i++) {
+        course.instructorName.push({
+          instructorName: data[`instructor_name_${i}`]
+        });
+      }
+  
+      // Learning outcomes
+      for (let i = 0; i < data.learn; i++) {
+        course.courseLearn.push({
+          courseLearn: data[`course_learn_${i}`]
+        });
+      }
+  
+      // Course content
+      for (let i = 0; i < data.total_courseContent; i++) {
+        course.courseContent.push({
+          title: data[`course_content_title_${i}`],
+          subtitle: data[`course_content_subtitle_${i}`],
+          video: data[`course_content_video_${i}`]
+        });
+      }
+  
+      // Post the course object
+      axiosPublic.post("/course", course).then((res) => {
+        if (res.data.acknowledged) {
+          toast.success("Course added successfully");
+          reset();
+        }
+      });
+    }
+    };
+
   return (
     <div className="mx-5">
       <form onSubmit={handleSubmit(onSubmit)} className="">
@@ -107,9 +117,10 @@ const AddCourse = () => {
           />
         </div>
 
-        <div className="mb-4">
+       <div className="flex gap-10">
+       <div className="mb-4 flex-1">
           <label
-            htmlFor="description"
+           
             className="block text-gray-700 text-sm font-bold mb-2"
           >
             Course Image
@@ -126,6 +137,28 @@ const AddCourse = () => {
             <span className="text-red-500 text-sm">{errors.photo.message}</span>
           )}
         </div>
+        <div className="mb-4 flex-1">
+        <div className="mb-4">
+        <Label htmlFor="category">Category</Label>
+        <Select id="category" {...register("category", { required: "Category is required" })} className="">
+        <option>Select catgeory</option>
+        <option>Python</option>
+        <option>Java</option>
+        <option>C++</option>
+        <option>React</option>
+        <option>Redux</option>
+        <option>Vue</option>
+        <option>Node</option>
+        <option>Mongodb</option>
+        <option>Cyber security</option>
+        <option>Machine learning</option>
+        
+        </Select>
+        {errors.category && <p className="text-red-500">{errors.category.message}</p>}
+      </div>
+    </div>
+       </div>
+      
 
         <div className="mb-4 grid grid-cols-3 gap-2">
           <div>
@@ -287,103 +320,65 @@ const AddCourse = () => {
           ))}
         </div>
 
-        {/* <div className="mb-4">
+       {/* course content */}
+       <div className="mb-4">
           <label
-            htmlFor="total_section"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
-           Total Instructors
+            Total Course Content
           </label>
           <input
             type="number"
-            id="instructors"
-            {...register("instructors", {})}
+            {...register("total_courseContent", {})}
             className="w-full border p-2 rounded focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
-        <div className="mb-4 ">
-          {Array.from({ length: totalInstructor }).map((_, index) => (
+
+        <div className="my-4">
+          {Array.from({ length:totalCourseContent}).map((_, index) => (
             <div key={index} className="">
-              <div className="flex gap-7">
-              <div className="w-full">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Instructor name {index + 1}
-                </label>
-                <input
-                  type="text"
-                  id={`instructor_name_${index}`}
-                  {...register(`instructor_name_${index}`, {})}
-                  className="w-full border p-2 rounded focus:outline-none focus:ring focus:border-blue-300"
-                />
-              </div>
-              {/* <div className="mb-4">
-          <label
-            htmlFor="description"
+              <div>
+              <label
             className="block text-gray-700 text-sm font-bold mb-2"
           >
-           Instructor Photo
+            Course Title{index+1} 
           </label>
-          <input
-            type="file"
-            id="instructor_photo"
-            {...register("instructor_photo", { required: "Photo is required" })}
-            className={`w-full p-2 block border rounded bg-transparent ${
-              errors.password ? "border-red-500" : "border-gray-500"
-            }`}
-          />
-          {errors.instructor_photo && (
-            <span className="text-red-500 text-sm">{errors.instructor_photo.message}</span>
-          )}
-        </div> 
-              </div>
-               <div className="grid grid-cols-3 gap-3 mt-3">
-               <div className="my02">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Instructor rating {index + 1}
-                </label>
                 <input
                   type="text"
-                  id={`instructor_rating_${index}`}
-                  {...register(`instructor_rating_${index}`, {})}
-                  className="w-full border p-2 rounded focus:outline-none focus:ring focus:border-blue-300"
-                />
+                  {...register(`course_content_title_${index}`, {})}
+                  className="w-full border p-2 mb-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+                  
+                 />
               </div>
               <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Instructor total_student {index + 1}
-                </label>
+              <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Course Subtitle{index+1} 
+          </label>
                 <input
-                  type="number"
-                  id={`instructor_total_student_${index}`}
-                  {...register(`instructor_total_student_${index}`, {})}
-                  className="w-full border p-2 rounded focus:outline-none focus:ring focus:border-blue-300"
-                />
+                  type="text"
+                  {...register(`course_content_subtitle_${index}`, {})}
+                  className="w-full border p-2 mb-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+                  
+                 />
               </div>
               <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Instructor total_course {index + 1}
-                </label>
+              <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Course Vedio{index+1} 
+          </label>
                 <input
-                  type="number"
-                  id={`instructor_total_course_${index}`}
-                  {...register(`instructor_total_course_${index}`, {})}
-                  className="w-full border p-2 rounded focus:outline-none focus:ring focus:border-blue-300"
-                />
-              </div>
-               </div>
-              <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Instructor About {index + 1}
-                </label>
-                <textarea
-                  id={`instructor_about_${index}`}
-                  {...register(`instructor_about_${index}`, {})}
-                  className="w-full border p-2 rounded focus:outline-none focus:ring focus:border-blue-300"
-                ></textarea>
+                  type="text"
+                  {...register(`course_content_video_${index}`, {})}
+                  className="w-full border p-2 mb-2 rounded focus:outline-none focus:ring focus:border-blue-300"
+                  
+                 />
               </div>
             </div>
           ))}
-        </div> */} 
+        </div>
 
         <button
           type="submit"

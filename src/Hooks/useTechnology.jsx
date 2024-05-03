@@ -4,7 +4,7 @@ import useAxiosPublic from "./useAxiosPublic";
 const useTechnology = () => {
     const axiosSecure = useAxiosPublic();
 
-    const { data: technologys=[], refetch, isLoading, isError } = useQuery({
+    const { data: technologys, refetch, isLoading, isError } = useQuery({
         queryKey: ['technology'],
         queryFn: async () => {
             const res = await axiosSecure.get('/technology');

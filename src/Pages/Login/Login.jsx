@@ -141,7 +141,7 @@ const Login = () => {
             </div>
             <div
               onClick={handleGoogle}
-              className="w-full  text-white cursor-pointer text-center border bg-blue-900  px-4 py-2 rounded-full flex items-center justify-center gap-1 text-xl"
+              className="w-full  text-white cursor-pointer text-center border bg-blue-900  px-4 py-2 rounded-md flex items-center justify-center gap-1 text-xl"
             >
                 <p><FcGoogle></FcGoogle></p>
               <p>Google</p>

@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import useCourse from "../../../Hooks/useCourse";
 import Loading from "../../Loading/Loading";
 import "./PopularCourse.css";
-import { Button, Card } from "flowbite-react";
+import { Card } from "flowbite-react";
 
 const PopularCourse = () => {
   const { courses } = useCourse();
+  console.log(courses)
 
   if (!courses) {
     return <Loading></Loading>;
@@ -41,7 +42,7 @@ const PopularCourse = () => {
         {courses.map((course, index) => (
           <div key={index} className="">
             <Card
-              className="max-w-sm min-h-[450px] shadow-md shadow-gray-500"
+              className="max-w-sm max-h-[450px] shadow-md shadow-gray-500"
               
             >
               <img src={course.photo} alt="" className="h-[200px]"/>
@@ -71,7 +72,7 @@ const PopularCourse = () => {
              }
              </div>
              <Link to={`/detailCourse/${course._id}`}>
-              <Button className="w-full text-2xl"><span className="text-lg">See more ...</span></Button>
+              <button className="w-full text-2xl bg-[#a945ec] text-white"><span className="text-lg">See more ...</span></button>
             </Link>
             </Card>
           </div>
