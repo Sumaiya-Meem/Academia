@@ -15,6 +15,7 @@ const googleProvider = new GoogleAuthProvider()
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [count, setCount] = useState(0);
 
     
 
@@ -58,7 +59,9 @@ const authInfo = {
       signInGoogle,
       loading,
       user,
-      logOutUser
+      logOutUser,
+      count,
+      setCount
 }
 
     return (

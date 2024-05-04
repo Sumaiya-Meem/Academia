@@ -1,8 +1,11 @@
 import { useForm } from "react-hook-form";
 import { toast, Toaster } from "react-hot-toast";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import { useContext } from "react";
+import { ContextProvider } from "../../../Context/AuthProvider";
 
 const MakeAnnounce = () => {
+  const{setCount}=useContext(ContextProvider);
   const { handleSubmit, register } = useForm();
   const axiosSecure = useAxiosPublic();
 
@@ -21,6 +24,8 @@ const MakeAnnounce = () => {
       console.log(res.data);
       if (res.data.acknowledged) {
         toast.success("create announcement successfully");
+        setCount(prev => prev + 1);
+        
       }
     });
   };

@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import useCourse from "../../../Hooks/useCourse";
 import Loading from "../../Loading/Loading";
 import "./PopularCourse.css";
-import { Card } from "flowbite-react";
+import { IoMdStar } from "react-icons/io";
+
 
 const PopularCourse = () => {
-  const { courses } = useCourse();
+  const [courses]= useCourse();
   console.log(courses)
 
   if (!courses) {
@@ -41,25 +42,25 @@ const PopularCourse = () => {
       <div className=" grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {courses.map((course, index) => (
           <div key={index} className="">
-            <Card
-              className="max-w-sm max-h-[450px] shadow-md shadow-gray-500"
+            <div
+              className="max-w-sm h-[392px] border-[2px] border-gray-700"
               
             >
-              <img src={course.photo} alt="" className="h-[200px]"/>
-              <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              <img src={course.photo} alt="" className="h-[200px] w-full"/>
+              <h5 className="text-2xl font-bold mt-3 px-3">
                 {course.title}
               </h5>
-             <div className="">
+             <div className="flex justify-between my-5 px-3">
              {
               course.offerPrice == 0 ? 
               <>
-               <p className="font-bold text-xl">
+               <p className="font-bold text-xl font-mono">
             ${course.price}
           </p>
               </>
               :
               <>
-              <div className="flex gap-4 items-center">
+              <div className="flex gap-4 items-center font-mono">
           
           <p className="font-bold text-xl">
             ${course.offerPrice}
@@ -70,11 +71,12 @@ const PopularCourse = () => {
          </div>
          </>
              }
+             <div className="flex items-center gap-1 font-semibold"><IoMdStar className="text-lg text-orange-500"></IoMdStar>{course.rating}</div>
              </div>
              <Link to={`/detailCourse/${course._id}`}>
-              <button className="w-full text-2xl bg-[#a945ec] text-white"><span className="text-lg">See more ...</span></button>
+              <button className="w-full bg-[#a945ec] text-white px-1 py-2 font-semibold"><span className="text-lg">See more ...</span></button>
             </Link>
-            </Card>
+            </div>
           </div>
         ))}
       </div>

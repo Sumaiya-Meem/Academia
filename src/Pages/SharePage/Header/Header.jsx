@@ -18,7 +18,7 @@ const Header = () => {
   const [showAnnouncement, setShowAnnouncement] = useState(false);
   
 
-  const { logOutUser, user } = useContext(ContextProvider);
+  const { logOutUser, user,count ,setCount} = useContext(ContextProvider);
 
   const timeDifference = (date) => {
     const currentDate = new Date();
@@ -90,7 +90,16 @@ const Header = () => {
         <> </>
       )}
     </>
+
   );
+
+  const handleNotificationClick = () => {
+    setShowAnnouncement(!showAnnouncement);
+    
+    if (!showAnnouncement) {
+      setCount(0);  // Reset count only if the announcements are about to be shown
+    }
+  };
   return (
     <div>
       <Navbar fluid className="fixed bg-[#fff] z-10 w-full shadow-md">
@@ -120,35 +129,33 @@ const Header = () => {
                   </Link>
                 </div>
                 <div className="relative">
-                  <IoMdNotificationsOutline
-                    className="text-3xl font-bold text-black "
-                    style={{ cursor: "pointer" }}
-                    onClick={() => setShowAnnouncement(!showAnnouncement)}
-                  ></IoMdNotificationsOutline>
-                  <p className="absolute -right-1 -top-2 w-[18px] text-center bg-blue-500 rounded-[50%] text-white">
-                    {/* {announcement.length} */}
-                  </p>
+      <IoMdNotificationsOutline
+        className="text-3xl font-bold text-black"
+        style={{ cursor: "pointer" }}
+        onClick={handleNotificationClick}
+      />
+      <p className="absolute -right-1 -top-2 w-[18px] text-center bg-blue-500 rounded-[50%] text-white">
+        {count}
+      </p>
 
-                  {showAnnouncement && (
-                    <div className="bg-white p-2 top-[45px] absolute w-[310px] right-0">
-                      {announcement.map((data) => (
-                        <>
-                          <div className="flex gap-2">
-                            <div className="bg-fuchsia-600 text-white p-1 rounded-md h-[30px]">
-                              <IoNotifications className="text-xl"></IoNotifications>
-                            </div>
-                            <div className="flex flex-col">
-                              <h1>{data.title}</h1>
-                              <p className="text-[12px] text-gray-700">
-                                {timeDifference(data.date)}
-                              </p>
-                            </div>
-                          </div>
-                        </>
-                      ))}
-                    </div>
-                  )}
-                </div>
+      {showAnnouncement && (
+        <div className="bg-white p-2 top-[45px] absolute w-[310px] right-0">
+          {announcement.map((data, index) => (
+            <div key={index} className="flex gap-2 my-2">
+              <div className="bg-fuchsia-600 text-white p-1 rounded-md h-[30px]">
+                <IoNotifications className="text-xl" />
+              </div>
+              <div className="flex flex-col">
+                <h1>{data.title}</h1>
+                <p className="text-[12px] text-gray-700">
+                  {timeDifference(data.date)}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
                 <Dropdown
                   arrowIcon={false}
                   inline

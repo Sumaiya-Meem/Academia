@@ -4,7 +4,7 @@ import useAxiosPublic from "./useAxiosPublic";
 const useCourse = () => {
     const axiosSecure = useAxiosPublic();
 
-    const { data: courses, refetch, isLoading, isError } = useQuery({
+    const { data: courses=[], refetch, isCourseLoading, isError } = useQuery({
         queryKey: ['course'],
         queryFn: async () => {
             const res = await axiosSecure.get('/course');
@@ -12,7 +12,7 @@ const useCourse = () => {
         }
     });
 
-    return { courses, refetch, isLoading, isError };
+    return [ courses, refetch, isCourseLoading, isError ];
 };
 
 export default useCourse;
