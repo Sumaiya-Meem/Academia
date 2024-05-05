@@ -147,6 +147,7 @@ const AddCourse = () => {
         <option>C++</option>
         <option>React</option>
         <option>Redux</option>
+        <option>React & Redux</option>
         <option>Vue</option>
         <option>Node</option>
         <option>Mongodb</option>

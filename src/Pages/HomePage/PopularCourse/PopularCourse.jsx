@@ -12,6 +12,16 @@ const PopularCourse = () => {
   if (!courses) {
     return <Loading></Loading>;
   }
+
+ 
+ const sliceTitle = (title) => {
+    const wordLimit = 5;
+    const words = title.split(' ');
+  
+    return words.length > wordLimit
+      ? words.slice(0, wordLimit).join(' ') + '...'
+      : title;
+  };
   return (
     <div className="my-10 mx-5">
       {/* title section */}
@@ -48,7 +58,7 @@ const PopularCourse = () => {
             >
               <img src={course.photo} alt="" className="h-[200px] w-full"/>
               <h5 className="text-2xl font-bold mt-3 px-3">
-                {course.title}
+                {sliceTitle(course.title)}
               </h5>
              <div className="flex justify-between my-5 px-3">
              {

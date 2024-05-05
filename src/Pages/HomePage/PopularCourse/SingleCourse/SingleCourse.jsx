@@ -24,7 +24,7 @@ import useCourse from "../../../../Hooks/useCourse";
 
 const SingleCourse = () => {
   const loadedCourse = useLoaderData();
-  console.log(loadedCourse)
+  // console.log(loadedCourse)
   const [instructors, isLoading] = useInstructor();
   const axiosPublic = useAxiosPublic();
 
@@ -62,12 +62,12 @@ const SingleCourse = () => {
 
   // const filledStars = Math.round(parseFloat(rating));
   const parsedRating = parseFloat(rating);
-const filledStars = !isNaN(parsedRating) ? Math.round(parsedRating) : 0;
+  const filledStars = !isNaN(parsedRating) ? Math.round(parsedRating) : 0;
 
-// When creating arrays for stars, ensure the count is within expected bounds
-const totalStars = 5;
-const displayedFilledStars = Math.min(Math.max(filledStars, 0), totalStars);
-const emptyStars = totalStars - displayedFilledStars;
+
+ const totalStars = 5;
+ const displayedFilledStars = Math.min(Math.max(filledStars, 0), totalStars);
+ const emptyStars = totalStars - displayedFilledStars;
 
   const percentageDiscount = ((price - offerPrice) / price) * 100;
   const discount = Math.round(percentageDiscount);
@@ -90,10 +90,13 @@ const emptyStars = totalStars - displayedFilledStars;
   // console.log(courseInstructors);
 
   const addedCart = carts.find((cart) => cart.courseId == _id);
+  // console.log(addedCart)
   const isCourseInCart = (courseId) => {
-    return carts.some((cartItem) => cartItem.courseId === courseId);
+    // console.log(courseId)
+    return carts.some((cartItem) => cartItem.courseId == courseId);
   };
-
+ 
+  
   const handleAddCart = () => {
     // console.log(loadedCourse);
     const cartItem = {
@@ -331,7 +334,7 @@ const emptyStars = totalStars - displayedFilledStars;
       </div>
 
       {/* another course base on category */}
-      <div className=" lg:ml-3 w-full lg:w-[64%] mt-10 border">
+      <div className=" lg:ml-3 w-full lg:w-[64%] mt-10 ">
         <h1 className="text-2xl font-bold">Students also bought</h1>
         {relatedCourses.map((data,index) => (
          <div key={index} className="flex justify-between  mb-2 border-b my-3 py-2">
