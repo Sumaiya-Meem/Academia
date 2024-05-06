@@ -236,7 +236,7 @@ const SingleCourse = () => {
             </div>
           </>
         )}
-        {addedCart || isCourseInCart ? (
+        {addedCart? (
           <>
             <Link to="/allCart">
               <button className="font-bold w-full bg-[#a945ec] text-white p-2">

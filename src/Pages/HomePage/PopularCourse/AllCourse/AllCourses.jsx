@@ -2,25 +2,44 @@ import useCourse from "../../../../Hooks/useCourse";
 import Loading from "../../../Loading/Loading";
 import { IoMdStar } from "react-icons/io";
 import { Link } from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
 const AllCourses = () => {
     const [courses ] = useCourse();
 
   if (!courses) {
     return <Loading></Loading>;
   }
+  const sliceTitle = (title) => {
+    const wordLimit = 5;
+    const words = title.split(' ');
+  
+    return words.length > wordLimit
+      ? words.slice(0, wordLimit).join(' ') + '...'
+      : title;
+  };
+
+  AOS.init();
+
     return (
         <div className="mt-0 pt-10">
           <h1 className="text-2xl mt-10 text-center font-bold font-serif">Our Popular Course</h1>
-                <div className=" grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-16 mx-5">
+                <div className=" grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-10 mx-5">
         {courses.map((course, index) => (
-           <div key={index} className="">
+           <div key={index} className="mb-5"
+           data-aos="fade-up"
+           data-aos-duration="1000"
+           data-aos-easing="ease-in-out"
+           >
            <div
              className="max-w-sm h-[392px] border-[2px] border-gray-700"
              
            >
              <img src={course.photo} alt="" className="h-[200px] w-full"/>
-             <h5 className="text-2xl font-bold mt-3 px-3">
-               {course.title}
+             <h5 className="text-2xl font-bold mt-3 px-3 h-[64px]">
+               {sliceTitle(course.title)}
              </h5>
             <div className="flex justify-between my-5 px-3">
             {

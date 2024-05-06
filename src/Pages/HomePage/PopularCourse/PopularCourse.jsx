@@ -3,11 +3,13 @@ import useCourse from "../../../Hooks/useCourse";
 import Loading from "../../Loading/Loading";
 import "./PopularCourse.css";
 import { IoMdStar } from "react-icons/io";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 const PopularCourse = () => {
   const [courses]= useCourse();
-  console.log(courses)
+  // console.log(courses)
 
   if (!courses) {
     return <Loading></Loading>;
@@ -22,10 +24,12 @@ const PopularCourse = () => {
       ? words.slice(0, wordLimit).join(' ') + '...'
       : title;
   };
+  AOS.init();
+
   return (
-    <div className="my-10 mx-5">
+    <div className="my-16 mx-5">
       {/* title section */}
-      <div className="flex flex-col lg:flex-row items-center mb-16">
+      <div className="flex flex-col lg:flex-row items-center mb-16 lg:ml-5">
         <div className="w-[400px] flex gap-7 mb-7 lg:mb-0">
           <div>
             <h1 className="text-xl font-semibold">Top Categories</h1>
@@ -50,14 +54,17 @@ const PopularCourse = () => {
       </div>
 
       <div className=" grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {courses.map((course, index) => (
-          <div key={index} className="">
+        {courses.slice(0,6).map((course, index) => (
+          <div key={index} className="mb-10"
+          data-aos="fade-up"
+           data-aos-duration="1000"
+           data-aos-easing="ease-in-out">
             <div
               className="max-w-sm h-[392px] border-[2px] border-gray-700"
               
             >
               <img src={course.photo} alt="" className="h-[200px] w-full"/>
-              <h5 className="text-2xl font-bold mt-3 px-3">
+              <h5 className="text-2xl font-bold mt-3 px-3 h-[64px]">
                 {sliceTitle(course.title)}
               </h5>
              <div className="flex justify-between my-5 px-3">
