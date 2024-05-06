@@ -21,8 +21,9 @@ const AllCartItem = () => {
   const [payments ] = usePaymentHistory();
   const {user}=useContext(ContextProvider);
   const { register, handleSubmit } = useForm();
-  const [rent, setRent ] = useState();
-  
+  const [rent, setRent ] = useState(0);
+ 
+
 
   if (isLoading) {
     return <Loading />;
@@ -42,6 +43,11 @@ const AllCartItem = () => {
     }
     return sum;
   }, 0);
+
+ // eslint-disable-next-line react-hooks/rules-of-hooks
+ useEffect(() => {
+    setRent(totalPrice);
+  }, [totalPrice]);
 
   const originalPrice = carts.reduce((sum, data) => {
     if (!isEnrolled(data.title)) {
@@ -159,13 +165,6 @@ const AllCartItem = () => {
   }
 
    // Apply coupon
-   // eslint-disable-next-line react-hooks/rules-of-hooks
-   
-   useEffect(() => {
-    setRent(totalPrice);
-  }, [totalPrice]);
-  
-   console.log(rent);
 
    const onSubmit = data => {
                
@@ -175,9 +174,7 @@ const AllCartItem = () => {
         return toast.error('invalid coupon')
      }
      const discountAmount = (rent/ 100) * 20; 
-     setRent(originalPrice - discountAmount);
-   
- 
+     setRent(rent - discountAmount);
  }
   return (
     <div className="mt-0">
