@@ -15,7 +15,7 @@ import "./course.css";
 import useInstructor from "../../../../Hooks/useInstructor";
 import Loading from "../../../Loading/Loading";
 import usePaymentHistory from "../../../../Hooks/usePaymentHistory";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ContextProvider } from "../../../Context/AuthProvider";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import useCart from "../../../../Hooks/useCart";
@@ -32,7 +32,6 @@ const SingleCourse = () => {
   const [payments] = usePaymentHistory();
   const [carts, refetch] = useCart();
   const [courses, isCourseLoading] = useCourse();
-
 
   if (isLoading || isCourseLoading) {
     <div>
@@ -64,10 +63,9 @@ const SingleCourse = () => {
   const parsedRating = parseFloat(rating);
   const filledStars = !isNaN(parsedRating) ? Math.round(parsedRating) : 0;
 
-
- const totalStars = 5;
- const displayedFilledStars = Math.min(Math.max(filledStars, 0), totalStars);
- const emptyStars = totalStars - displayedFilledStars;
+  const totalStars = 5;
+  const displayedFilledStars = Math.min(Math.max(filledStars, 0), totalStars);
+  const emptyStars = totalStars - displayedFilledStars;
 
   const percentageDiscount = ((price - offerPrice) / price) * 100;
   const discount = Math.round(percentageDiscount);
@@ -79,10 +77,10 @@ const SingleCourse = () => {
 
   // console.log(hasPurchased)
   // find related course base on category
-  const relatedCourses = courses?.filter(
+  const instructorRelatedCourses = courses?.filter(
     (course) => course.category === category && course._id !== _id
   );
-  // console.log("the related course are:", relatedCourses);
+  // console.log("the related course are:", instructorRelatedCourses);
 
   const courseInstructors = instructors.filter((instructor) =>
     instructorName.some((data) => data.instructorName === instructor.name)
@@ -90,13 +88,13 @@ const SingleCourse = () => {
   // console.log(courseInstructors);
 
   const addedCart = carts.find((cart) => cart.courseId == _id);
-  // console.log(addedCart)
+  // console.log("Added Cart",addedCart)
   const isCourseInCart = (courseId) => {
     // console.log(courseId)
     return carts.some((cartItem) => cartItem.courseId == courseId);
   };
- 
-  
+  // console.log("isCourseInCart ..  ",isCourseInCart)
+
   const handleAddCart = () => {
     // console.log(loadedCourse);
     const cartItem = {
@@ -122,13 +120,14 @@ const SingleCourse = () => {
     const cartItem = {
       email: user.email,
       courseId: data._id,
-      title:data.title,
-      price:data.price,
-      offerPrice:data.offerPrice,
-      photo:data.photo,
-      rating:data.rating,
-      totalRating:data.totalRating,
+      title: data.title,
+      price: data.price,
+      offerPrice: data.offerPrice,
+      photo: data.photo,
+      rating: data.rating,
+      totalRating: data.totalRating,
     };
+    // console.log(cartItem)
     axiosPublic.post("/carts", cartItem).then((res) => {
       if (res.data.insertedId) {
         toast.success("course added to cart");
@@ -142,11 +141,42 @@ const SingleCourse = () => {
   const handleVideoOpen = (data) => {
     // console.log("Opening video for data:", data);
     if (hasPurchased) {
-      setSelectedData(data); 
+      setSelectedData(data);
       setOpenModal(true);
     } else {
       toast.error("Please purchase the course to access the video.");
     }
+  };
+// function for show more course by instructor
+  const [instructorRelatedCourse, setInstructorRelatedCourses] = useState([]);
+  useEffect(() => {
+    if (courses && loadedCourse) {
+        const instructorNames = loadedCourse.instructorName.map(i => i.instructorName);
+        const coursesByInstructor = {};
+
+        instructorNames.forEach(name => {
+            let filteredCourses = courses.filter(course =>
+                course._id !== loadedCourse._id &&
+                course.instructorName.some(instructor => instructor.instructorName === name)
+            );
+            
+            if (filteredCourses.length > 0) {
+                coursesByInstructor[name] = filteredCourses;
+            }
+        });
+
+        setInstructorRelatedCourses(coursesByInstructor);
+        console.log("Courses by Instructor:", coursesByInstructor);
+    }
+}, [courses, loadedCourse]);
+
+  const sliceTitle = (title) => {
+    const wordLimit = 5;
+    const words = title.split(' ');
+  
+    return words.length > wordLimit
+      ? words.slice(0, wordLimit).join(' ') + '...'
+      : title;
   };
 
   return (
@@ -161,13 +191,13 @@ const SingleCourse = () => {
             <div className="text-orange-500 flex items-center gap-2 ">
               <p className="font-bold">{rating}</p>
               <Rating>
-      {[...Array(displayedFilledStars)].map((_, index) => (
-        <Rating.Star key={index} filled />
-      ))}
-      {[...Array(emptyStars)].map((_, index) => (
-        <Rating.Star key={index} filled={false} />
-      ))}
-    </Rating>
+                {[...Array(displayedFilledStars)].map((_, index) => (
+                  <Rating.Star key={index} filled />
+                ))}
+                {[...Array(emptyStars)].map((_, index) => (
+                  <Rating.Star key={index} filled={false} />
+                ))}
+              </Rating>
             </div>
 
             <div className="text-[#c0c4fc] underline">
@@ -236,7 +266,7 @@ const SingleCourse = () => {
             </div>
           </>
         )}
-        {addedCart? (
+        {addedCart ? (
           <>
             <Link to="/allCart">
               <button className="font-bold w-full bg-[#a945ec] text-white p-2">
@@ -285,7 +315,7 @@ const SingleCourse = () => {
       </Card>
 
       {/*  what they learn section*/}
-      <div className="learn mt-10 ml-3 mb-5 p-5 border-[1px] border-gray-400">
+      <div className="learn mt-10 lg:ml-5 mb-5 p-5 border-[1px] border-gray-400">
         <h1 className="font-bold text-xl"> What you will learn</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 my-3">
@@ -302,12 +332,12 @@ const SingleCourse = () => {
       </div>
 
       {/* course content */}
-      <div className="learn lg:ml-3">
+      <div className="learn lg:ml-5">
         <h1 className="font-bold text-xl my-4">Course Content</h1>
         {courseContent.map((data, index) => (
           <Accordion key={index}>
             <Accordion.Panel>
-              <Accordion.Title className="font-bold">
+              <Accordion.Title className="font-semiboldbold text-black">
                 {data.title}
               </Accordion.Title>
               <Accordion.Content>
@@ -334,56 +364,64 @@ const SingleCourse = () => {
       </div>
 
       {/* another course base on category */}
-      <div className=" lg:ml-3 w-full lg:w-[64%] mt-10 ">
+      <div className=" lg:ml-5 w-full lg:w-[64%] mt-10 ">
         <h1 className="text-2xl font-bold">Students also bought</h1>
-        {relatedCourses.map((data,index) => (
-         <div key={index} className="flex justify-between  mb-2 border-b my-3 py-2">
-         <Link to={`/detailCourse/${data._id}`}>
-           <div className="flex gap-3">
-             <img src={data.photo} alt="" className="w-[150px] h-[70px]" />
-             <div className="flex gap-10">
-              <div> <p className="font-semibold text-base">{data.title}</p>
-               <p className="font-semibold mt-3">Update: {data.updateDate}</p></div>
-               <div className="flex gap-1">
-                
-                 <p className="font-bold">{data.rating}</p>
-                 <IoMdStar className="mt-1 text-orange-500"></IoMdStar>
-               </div>
-               
-             </div>
-           </div>
-         </Link>
-         <div className="flex gap-12">
-           <div>
-             <h1 className="font-bold">${data.offerPrice > 0 ? data.offerPrice : data.price}</h1>           
-           </div>
-           <div className=" mr-5">
-           {isCourseInCart(data._id) ? (
-          <>
-            <Link to="/allCart">
-              <button className="font-medium w-full border   p-2">
-                Go to cart
-              </button>
+        {instructorRelatedCourses.map((data, index) => (
+          <div
+            key={index}
+            className="flex justify-between  mb-2 border-b my-3 py-2"
+          >
+            <Link to={`/detailCourse/${data._id}`}>
+              <div className="flex gap-3">
+                <img src={data.photo} alt="" className="w-[150px] h-[70px]" />
+                <div className="flex gap-10">
+                  <div>
+                    {" "}
+                    <p className="font-semibold text-base">{data.title}</p>
+                    <p className="font-semibold mt-3">
+                      Update: {data.updateDate}
+                    </p>
+                  </div>
+                  <div className="flex gap-1">
+                    <p className="font-bold">{data.rating}</p>
+                    <IoMdStar className="mt-1 text-orange-500"></IoMdStar>
+                  </div>
+                </div>
+              </div>
             </Link>
-          </>
-        ) :
-        (<>
-        <div className="border-[1px] border-solid border-[#252525] rounded-full text-xl py-1 w-[35px] h-[35px] mb-3 bg-fuchsia-100">
-            <button onClick={()=>handleAddCart2(data)}><BsCartPlus className="mt-1 ml-[6px]"></BsCartPlus></button>
+            <div className="flex gap-12">
+              <div>
+                <h1 className="font-bold">
+                  ${data.offerPrice > 0 ? data.offerPrice : data.price}
+                </h1>
+              </div>
+              <div className=" mr-5">
+                {isCourseInCart(data._id) ? (
+                  <>
+                    <Link to="/allCart">
+                      <button className="font-medium w-full border   p-2">
+                        Go to cart
+                      </button>
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <div className="border-[1px] border-solid border-[#252525] rounded-full text-xl py-1 w-[35px] h-[35px] mb-3 bg-fuchsia-100">
+                      <button onClick={() => handleAddCart2(data)}>
+                        <BsCartPlus className="mt-1 ml-[6px]"></BsCartPlus>
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
-        </>)}
-            
-        
-
-           </div>
-         </div>
-       </div>
+          </div>
         ))}
       </div>
 
       {/* instructor */}
 
-      <div className=" lg:ml-3 w-[98%] lg:w-[50%] mt-10">
+      <div className=" lg:ml-5 w-[98%] lg:w-[50%] mt-10">
         <h1 className="font-bold text-2xl  ml-3 lg:ml-0">Instructor</h1>
         <div className="flex flex-col md:flex-row md:gap-20 ">
           {courseInstructors.length > 0
@@ -419,6 +457,71 @@ const SingleCourse = () => {
               ))
             : " "}
         </div>
+      </div>
+
+      {/* more course by instructor  */}
+      <div>
+        {
+        
+        Object.keys(instructorRelatedCourse).map((instructorName) => (
+          <div
+            key={instructorName}
+            className="lg:ml-5 w-[98%] lg:w-[60%] mt-10"
+          >
+            <h1 className="text-xl font-bold mb-5">
+              More Courses by
+              <span className="text-blue-600 underline"> {instructorName}</span>
+            </h1>
+
+            <div className="grid grid-cols-3 gap-4">
+              {instructorRelatedCourse[instructorName].length > 0
+                ? instructorRelatedCourse[instructorName].map((course) => (
+                    <div key={course._id} className="">
+                      <Link to={`/detailCourse/${course._id}`}>
+                        <div className="flex flex-col items-start border">
+                          <img
+                            src={course.photo}
+                            alt=""
+                            className="h-[100px] w-full"
+                          />
+                          <div className="px-2">
+                            <h2 className="font-semibold mt-2 h-[50px]">
+                              {sliceTitle(course.title)}
+                            </h2>
+                            <div className="flex justify-between items-center w-full mt-2">
+                              <div className="flex items-center gap-1">
+                                <h1 className="font-bold">{course.rating}.0</h1>
+                                <IoMdStar className="text-orange-500"></IoMdStar>
+                              </div>
+                              <div className="flex gap-1 items-center mb-1">
+                                <MdPeople></MdPeople>
+                                <span>
+                                  {parseInt(course.totalEnrollStudent) > 999
+                                    ? parseInt(
+                                        course.totalEnrollStudent
+                                      ).toLocaleString()
+                                    : course.totalEnrollStudent}
+                                </span>
+                              </div>
+                            </div>
+                            <h1>
+                              <span className="font-semibold">
+                                Last Update:
+                              </span>{" "}
+                              {course.updateDate}
+                            </h1>
+                            <h1 className="font-bold my-2">
+                              ${course.price}.00
+                            </h1>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))
+                : ""}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
