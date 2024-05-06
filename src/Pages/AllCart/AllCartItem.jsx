@@ -9,8 +9,10 @@ import usePaymentHistory from "../../Hooks/usePaymentHistory";
 import { IoMdPricetag } from "react-icons/io";
 import toast from "react-hot-toast";
 import { ContextProvider } from "../Context/AuthProvider";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import useSaveItem from "../../Hooks/useSaveItem";
+import { useForm } from "react-hook-form";
+import { RxCross2 } from "react-icons/rx";
 
 const AllCartItem = () => {
   const [carts, refetch, isLoading] = useCart();
@@ -18,6 +20,9 @@ const AllCartItem = () => {
   const axiosPublic = useAxiosPublic();
   const [payments ] = usePaymentHistory();
   const {user}=useContext(ContextProvider);
+  const { register, handleSubmit } = useForm();
+  const [rent, setRent ] = useState();
+  
 
   if (isLoading) {
     return <Loading />;
@@ -152,6 +157,28 @@ const AllCartItem = () => {
         }
       });
   }
+
+   // Apply coupon
+   // eslint-disable-next-line react-hooks/rules-of-hooks
+   
+   useEffect(() => {
+    setRent(totalPrice);
+  }, [totalPrice]);
+  
+   console.log(rent);
+
+   const onSubmit = data => {
+               
+   console.log(data.coupon)
+      
+     if(data.coupon!="LETSLEARN"){
+        return toast.error('invalid coupon')
+     }
+     const discountAmount = (rent/ 100) * 20; 
+     setRent(originalPrice - discountAmount);
+   
+ 
+ }
   return (
     <div className="mt-0">
       {carts.length > 0 ? (
@@ -220,10 +247,48 @@ const AllCartItem = () => {
                 discount >0 ?
                 <><h1>{discount}% off</h1></>:<></>
             }
-            <Link to="/make-payment" state={{ price: totalPrice,CourseTitle: courseTitles}}>
+            <Link to="/make-payment" state={{ price: rent,CourseTitle: courseTitles}}>
                 <button className="bg-[#a435f0] text-white w-[98%] p-2 mt-3 font-semibold text-lg">
                     Checkout</button>
             </Link>
+            <div>
+          <h1 className="font-bold mt-5">Apply Coupon </h1>
+          <div className="w-[110px] h-[1px] bg-black mt-1"></div>
+          <div className="border-[1px] border-dashed border-gray-400 my-3">
+            <div className="flex p-2 justify-between items-center">
+              <div className="flex flex-col ">
+                <h1>
+                  <span className="font-bold">LETSLEARN</span>{" "}
+                  <span className="text-sm">is academia coupon</span>{" "}
+                </h1>
+                <p className="text-sm">use coupon to save pay</p>
+              </div>
+              <div>
+                <RxCross2 className="text-xl"></RxCross2>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-2">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex"
+            >
+              <input
+                {...register("coupon")}
+                type="text"
+                className="w-full  bg-white pl-2 text-base font-semibold outline-0"
+                placeholder="Enter Coupon"
+              />
+
+              <input
+                value="Apply"
+                className="bg-[#9b3cdb] p-2 rounded-tr-lg rounded-br-lg text-white font-semibold  transition-colors"
+                type="submit"
+              />
+            </form>
+          </div>
+        </div>
           </div>
         }
 

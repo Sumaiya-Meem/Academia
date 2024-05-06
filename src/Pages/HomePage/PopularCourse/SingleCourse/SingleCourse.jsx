@@ -21,8 +21,11 @@ import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 import useCart from "../../../../Hooks/useCart";
 import { PiVideoBold } from "react-icons/pi";
 import useCourse from "../../../../Hooks/useCourse";
+import { RxCross2 } from "react-icons/rx";
+import { useForm } from "react-hook-form";
 
 const SingleCourse = () => {
+  const { register, handleSubmit } = useForm();
   const loadedCourse = useLoaderData();
   // console.log(loadedCourse)
   const [instructors, isLoading] = useInstructor();
@@ -147,37 +150,62 @@ const SingleCourse = () => {
       toast.error("Please purchase the course to access the video.");
     }
   };
-// function for show more course by instructor
+  // function for show more course by instructor
   const [instructorRelatedCourse, setInstructorRelatedCourses] = useState([]);
   useEffect(() => {
     if (courses && loadedCourse) {
-        const instructorNames = loadedCourse.instructorName.map(i => i.instructorName);
-        const coursesByInstructor = {};
+      const instructorNames = loadedCourse.instructorName.map(
+        (i) => i.instructorName
+      );
+      const coursesByInstructor = {};
 
-        instructorNames.forEach(name => {
-            let filteredCourses = courses.filter(course =>
-                course._id !== loadedCourse._id &&
-                course.instructorName.some(instructor => instructor.instructorName === name)
-            );
-            
-            if (filteredCourses.length > 0) {
-                coursesByInstructor[name] = filteredCourses;
-            }
-        });
+      instructorNames.forEach((name) => {
+        let filteredCourses = courses.filter(
+          (course) =>
+            course._id !== loadedCourse._id &&
+            course.instructorName.some(
+              (instructor) => instructor.instructorName === name
+            )
+        );
 
-        setInstructorRelatedCourses(coursesByInstructor);
-        console.log("Courses by Instructor:", coursesByInstructor);
+        if (filteredCourses.length > 0) {
+          coursesByInstructor[name] = filteredCourses;
+        }
+      });
+
+      setInstructorRelatedCourses(coursesByInstructor);
+      // console.log("Courses by Instructor:", coursesByInstructor);
     }
-}, [courses, loadedCourse]);
+  }, [courses, loadedCourse]);
 
   const sliceTitle = (title) => {
     const wordLimit = 5;
-    const words = title.split(' ');
-  
+    const words = title.split(" ");
+
     return words.length > wordLimit
-      ? words.slice(0, wordLimit).join(' ') + '...'
+      ? words.slice(0, wordLimit).join(" ") + "..."
       : title;
   };
+
+  // Apply coupon
+  const [rent, setRent ] = useState();
+  useEffect(() => {
+    setRent(offerPrice > 0 ? offerPrice : price); 
+  }, [price, offerPrice]);
+
+  const onSubmit = data => {
+              
+  console.log(data.coupon)
+     
+    if(data.coupon!="LETSLEARN"){
+       return toast.error('invalid coupon')
+    }
+    const originalPrice = offerPrice > 0 ? offerPrice : price; 
+    const discountAmount = (originalPrice / 100) * 20; 
+    setRent(originalPrice - discountAmount);
+  
+
+}
 
   return (
     <div className="mt-0">
@@ -247,7 +275,7 @@ const SingleCourse = () => {
       </div>
 
       {/* card */}
-      <Card className=" lg:absolute  lg:right-[4%] lg:top-20 lg:max-w-sm w-full min-h-[400px] shadow-md shadow-gray-500">
+      <Card className=" lg:absolute  lg:right-[3%] lg:top-20 lg:max-w-sm w-full min-h-[400px] shadow-md shadow-gray-500">
         <img src={photo} alt="" className="hidden lg:block" />
         {offerPrice == 0 ? (
           <>
@@ -287,7 +315,7 @@ const SingleCourse = () => {
         <Link
           to="/make-payment"
           state={{
-            price: offerPrice > 0 ? offerPrice : price,
+            price: rent,
             CourseTitle: title,
           }}
         >
@@ -310,6 +338,46 @@ const SingleCourse = () => {
               <LiaCertificateSolid className=""></LiaCertificateSolid>
               Certificate of completion
             </div>
+          </div>
+        </div>
+        {/* coupon div */}
+        <div>
+          <h1 className="font-bold">Apply Coupon </h1>
+          <div className="w-[110px] h-[1px] bg-black mt-1"></div>
+          <div className="border-[1px] border-dashed border-gray-400 my-3">
+            <div className="flex p-2 justify-between items-center">
+              <div className="flex flex-col ">
+                <h1>
+                  <span className="font-bold">LETSLEARN</span>{" "}
+                  <span className="text-sm">is academia coupon</span>{" "}
+                </h1>
+                <p className="text-sm">use coupon to save pay</p>
+              </div>
+              <div>
+                {" "}
+                <RxCross2 className="text-xl"></RxCross2>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-2">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex"
+            >
+              <input
+                {...register("coupon")}
+                type="text"
+                className="w-full  bg-white pl-2 text-base font-semibold outline-0"
+                placeholder="Enter Coupon"
+              />
+
+              <input
+                value="Apply"
+                className="bg-[#9b3cdb] p-2 rounded-tr-lg rounded-br-lg text-white font-semibold  transition-colors"
+                type="submit"
+              />
+            </form>
           </div>
         </div>
       </Card>
@@ -461,9 +529,7 @@ const SingleCourse = () => {
 
       {/* more course by instructor  */}
       <div>
-        {
-        
-        Object.keys(instructorRelatedCourse).map((instructorName) => (
+        {Object.keys(instructorRelatedCourse).map((instructorName) => (
           <div
             key={instructorName}
             className="lg:ml-5 w-[98%] lg:w-[60%] mt-10"
