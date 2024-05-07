@@ -1,0 +1,14 @@
+
+.pagination  button{
+   margin-right: 6px;
+   border: 1px solid #0000003b;
+   padding: 3px 9px;
+   border-radius: 4px;
+   /* min-width: 32px; */
+}
+
+.pagination .selected{
+    background-color: #343c97;
+    border-color: #343c97;
+    color: #fff;
+}

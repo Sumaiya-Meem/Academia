@@ -52,6 +52,7 @@ import AllCartItem from "../AllCart/AllCartItem";
       {
         path: "/allCourses",
         element:<AllCourses></AllCourses>, 
+        loader:()=>fetch('http://localhost:5000/courseCount')
       },
         {
           path: "/login",

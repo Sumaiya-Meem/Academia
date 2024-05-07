@@ -142,6 +142,7 @@ const AddCourse = () => {
         <Label htmlFor="category">Category</Label>
         <Select id="category" {...register("category", { required: "Category is required" })} className="">
         <option>Select catgeory</option>
+        <option>Javascript</option>
         <option>Python</option>
         <option>Java</option>
         <option>C++</option>

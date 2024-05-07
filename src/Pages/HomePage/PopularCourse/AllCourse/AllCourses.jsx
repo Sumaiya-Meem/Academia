@@ -4,14 +4,38 @@ import { IoMdStar } from "react-icons/io";
 import { Link } from "react-router-dom";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
-
+import { useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
+import './AllCourse.css'
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
 const AllCourses = () => {
-    const [courses ] = useCourse();
+    // const [courses ] = useCourse();
+    const {count}= useLoaderData();
+    const axiosSecure = useAxiosPublic();
+    const [currentPage,setCurrentPage]=useState();
+    const [courses,setCourses]=useState([]);
 
   if (!courses) {
     return <Loading></Loading>;
   }
+
+  const coursePerPage=6;
+  const numberOfPages=Math.ceil(count/coursePerPage);
+
+  const pages=[...Array(numberOfPages).keys()];
+  console.log(pages)
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    axiosSecure.get(`/course?page=${currentPage}&size=${coursePerPage}`)
+        .then(res => {         
+            setCourses(res.data);
+        })
+
+}, [axiosSecure, currentPage,coursePerPage])
+
   const sliceTitle = (title) => {
     const wordLimit = 5;
     const words = title.split(' ');
@@ -23,6 +47,26 @@ const AllCourses = () => {
 
   AOS.init();
 
+  const handlePrev =()=>{
+    if(currentPage>0){
+      setCurrentPage(currentPage-1);
+    }
+    // else if(currentPage<0){
+    //   setCurrentPage(currentPage);
+    // }
+  }
+  const handleNext =()=>{
+    // console.log(pages.length)
+    if(currentPage<pages.length){
+      
+      setCurrentPage(currentPage+1);
+    }
+    else if(currentPage == pages.length){
+      setCurrentPage(currentPage);
+    }
+  }
+
+ 
     return (
         <div className="mt-0 pt-10">
           <h1 className="text-2xl mt-10 text-center font-bold font-serif">Our Popular Course</h1>
@@ -70,6 +114,16 @@ const AllCourses = () => {
            </div>
          </div>
         ))}
+      </div> 
+
+      <div className="pagination flex justify-center mt-5">
+        <button className=""><MdOutlineKeyboardArrowLeft onClick={handlePrev}></MdOutlineKeyboardArrowLeft></button>
+          {pages.map(page=>
+          <button key={page} className={currentPage == page+1 ? 'selected':" "}
+          onClick={()=>setCurrentPage(page+1)}>{page+1}</button>
+          
+          )}
+           <button><MdKeyboardArrowRight onClick={handleNext}></MdKeyboardArrowRight></button>
       </div>
         </div>
     );
