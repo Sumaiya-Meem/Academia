@@ -21,6 +21,7 @@ import PrivateRoute from "./PrivateRoute";
 import PaymentHistory from "../DashboardPage/UserPage/PaymentHistory";
 import AllCourses from "../HomePage/PopularCourse/AllCourse/AllCourses";
 import AllCartItem from "../AllCart/AllCartItem";
+import UpdateProfile from "../DashboardPage/UpdateProfile/UpdateProfile";
 
 
 
@@ -102,6 +103,11 @@ import AllCartItem from "../AllCart/AllCartItem";
         {
           path: 'makeAnnounce',
           element:<MakeAnnounce></MakeAnnounce>
+        },
+        {
+          path: 'updateUser/:id',
+          element:<UpdateProfile></UpdateProfile>,
+          loader:({params})=>fetch(`http://localhost:5000/users/${params.id}`)
         },
         
       //  user 

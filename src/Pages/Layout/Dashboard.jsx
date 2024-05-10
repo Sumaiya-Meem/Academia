@@ -10,7 +10,6 @@ import { ContextProvider } from "../Context/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { ImProfile } from "react-icons/im";
 import { GrTechnology } from "react-icons/gr";
-import logo from "../../../public/logo.png"
 import { GrBook } from "react-icons/gr";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 
@@ -40,9 +39,9 @@ const Dashboard = () => {
 
   return (
     <div  className="lg:min-h-screen h-full  bg-blue-950">
-        <div className="flex-1 pt-5 pb-3  px-2 mx-2">
+        <div className="flex-1 pt-5 pb-3  px-2 mx-2 border-b border-gray-400 ">
           <h1 className="text-center text-3xl text-white font-serif mb-1">Academia</h1>
-                <img src={logo} alt=""  className='h-[50px] w-[90px] mx-auto'/>
+                {/* <img src={logo} alt=""  className='h-[50px] w-[90px] mx-auto'/> */}
         </div>
     {
        isAdmin ?

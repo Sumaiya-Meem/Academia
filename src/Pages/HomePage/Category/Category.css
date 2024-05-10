@@ -42,7 +42,8 @@
 
 .card{
     position: relative;
-    background: #1aae9d;
+    /* background: #1aae9d; */
+    background: #20CEBA;
     box-shadow: 10px;
     border-radius: 15px;
 }

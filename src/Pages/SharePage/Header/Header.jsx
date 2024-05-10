@@ -13,7 +13,7 @@ import { IoNotifications } from "react-icons/io5";
 import useCart from "../../../Hooks/useCart";
 
 const Header = () => {
-  const { announcement } = useAnnouncement();
+  const [ announcement ] = useAnnouncement();
   const [carts] = useCart();
   const [showAnnouncement, setShowAnnouncement] = useState(false);
   
@@ -46,6 +46,12 @@ const Header = () => {
     });
   };
 
+  const sortedAnnouncements = announcement.sort((a, b) => {
+    
+    const date1 = new Date(a.date);
+    const date2 = new Date(b.date);
+    return date2 - date1;
+  });
 
   const navItem = (
     <>
@@ -97,7 +103,7 @@ const Header = () => {
     setShowAnnouncement(!showAnnouncement);
     
     if (!showAnnouncement) {
-      setCount(0);  // Reset count only if the announcements are about to be shown
+      setCount(0); 
     }
   };
   return (
@@ -140,7 +146,7 @@ const Header = () => {
 
       {showAnnouncement && (
         <div className="bg-white p-2 top-[45px] absolute w-[310px] right-0">
-          {announcement.map((data, index) => (
+          {sortedAnnouncements .map((data, index) => (
             <div key={index} className="flex gap-2 my-2">
               <div className="bg-fuchsia-600 text-white p-1 rounded-md h-[30px]">
                 <IoNotifications className="text-xl" />

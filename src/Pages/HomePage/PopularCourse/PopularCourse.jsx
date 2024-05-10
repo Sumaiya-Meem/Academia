@@ -60,7 +60,7 @@ const PopularCourse = () => {
            data-aos-duration="1000"
            data-aos-easing="ease-in-out">
             <div
-              className="max-w-sm h-[392px] border-[2px] border-gray-700"
+              className="max-w-sm h-[392px] "
               
             >
               <img src={course.photo} alt="" className="h-[200px] w-full"/>

@@ -1,4 +1,4 @@
-import useCourse from "../../../../Hooks/useCourse";
+// import useCourse from "../../../../Hooks/useCourse";
 import Loading from "../../../Loading/Loading";
 import { IoMdStar } from "react-icons/io";
 import { Link } from "react-router-dom";
@@ -78,7 +78,7 @@ const AllCourses = () => {
            data-aos-easing="ease-in-out"
            >
            <div
-             className="max-w-sm h-[392px] border-[2px] border-gray-700"
+             className="max-w-sm h-[392px]"
              
            >
              <img src={course.photo} alt="" className="h-[200px] w-full"/>

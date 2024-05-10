@@ -1,17 +1,14 @@
-
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import {Link , useNavigate} from 'react-router-dom'
-
 import { ContextProvider } from "../Context/AuthProvider";
-
-// import bg from "../../assets/login.avif";
+import bg from "../../../public/bg2.jpg"
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
-
+import { BsExclamationLg } from "react-icons/bs";
 
 // const IMG_HOASTING_KEY = import.meta.env.VITE_IMAGE_UPLOAD_API;
 // const img_hosting_api = `https://api.imgbb.com/1/upload?key=${IMG_HOASTING_KEY}`
@@ -23,7 +20,7 @@ const Register = () => {
     const navigate = useNavigate()
     
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors },getValues } = useForm();
 
 
     const onSubmit =async (data) => {
@@ -39,6 +36,10 @@ const Register = () => {
         // const img_url = res?.data?.data?.display_url;
         // console.log(img_url)
         // if(img_url){
+            if (data.password !== data.confirmPassword) {
+                toast.error("Passwords do not match.");
+                return; 
+            }
             createUser(data.email, data.password)
             .then(result=> {
                 console.log(result.user)
@@ -76,29 +77,28 @@ const Register = () => {
             })
         // }
      }
-    // const backgroundImageStyle = {
-    //     backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${bg})`,
-    //     backgroundSize: "cover",
-    //     backgroundPosition: "center",
-    //     height: "100vh",
-    //   };
+     const backgroundImageStyle = {
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${bg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      };
     
 
     return (
-       
-        // <div style={backgroundImageStyle} className="w-full bg-gradient-to-r from-[#00000033] to-[#00000033] mt-0">
-        <div className="w-full">
-        <div className="flex items-center justify-center w-[100%] md:w-[60%] lg:w-[40%] mx-auto " >
-      <div className="mt-28 text-black p-4 w-full  shadow-lg rounded-md  border border-gray-200">
- 
-
-                <form className="w-full " onSubmit={handleSubmit(onSubmit)}>
-                    <h2 className="text-2xl text-black font-bold mb-2 text-center">Registration Now</h2>
-
+        <div style={backgroundImageStyle} className="w-full mt-0 h-full pb-28">
+             <div className="flex items-center justify-center w-[100%] md:w-[60%] lg:w-[40%] mx-auto " >
+      <div className="mt-20 text-white p-2 w-full bg-gradient-to-r from-[#02020233] to-[#00000033]  border-[1px] border-gray-600 rounded-md">
+        <form
+          className="text-white"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="flex justify-center items-center"><h2 className="text-2xl font-bold mb-4 text-center ">Register Now</h2>
+          <h1 className="text-3xl -mt-2"><BsExclamationLg></BsExclamationLg></h1>
+          </div>
                     <div className="mb-2">
                     <label
               htmlFor="email"
-              className="block text-black text-sm font-bold mb-2"
+              className="block text-sm font-bold mb-2"
             >
               Name
             </label>
@@ -115,7 +115,7 @@ const Register = () => {
                     <div className="mb-2">
                     <label
               htmlFor="email"
-              className="block text-black text-sm font-bold mb-2"
+              className="block  text-sm font-bold mb-2"
             >
               Email
             </label>
@@ -134,7 +134,7 @@ const Register = () => {
                     <div className="mb-2">
                     <label
               htmlFor="email"
-              className="block text-black text-sm font-bold mb-2"
+              className="block  text-sm font-bold mb-2"
             >
               Password
             </label>
@@ -147,6 +147,23 @@ const Register = () => {
                         />
                         {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
                     </div>
+                    <div className="mb-2">
+                            <label htmlFor="confirmPassword" className="block text-sm font-bold mb-2">
+                                Confirm Password
+                            </label>
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="confirm password"
+                                {...register('confirmPassword', {
+                                    required: "Confirm Password is required",
+                                    validate: (value) => 
+                                        value === getValues('password') || "Password is not match"
+                                })}
+                                className={`w-full p-2 block border rounded bg-transparent ${errors.confirmPassword ? 'border-red-500' : 'border-gray-500'}`}
+                            />
+                            {errors.confirmPassword && <span className="text-red-500 text-sm">{errors.confirmPassword.message}</span>}
+                        </div>
 
                     {/* <div className="mb-2">
                         <input
@@ -161,12 +178,12 @@ const Register = () => {
                     <div className="flex justify-between">
                         <button
                             type="submit"
-                            className=" bg-blue-900 border text-white border-gray-400  w-full rounded-md font-bold px-4 py-2 focus:outline-none focus:shadow-outline-blue"
+                            className=" bg-[#f6efef33]  text-white  w-full rounded-md font-bold px-4 py-2 focus:outline-none focus:shadow-outline-blue"
                         >
                             Sing Up
                         </button>
                     </div>
-                    <h1 className="mt-2 text-black">Do You Have Any Account? <Link className="text-blue-800 font-bold underline" to='/login'>Login</Link></h1>
+                    <h1 className="mt-2 ">Do You Have Any Account? <Link className="text-blue-400 font-bold underline" to='/login'>Login</Link></h1>
                 </form>
 
 
