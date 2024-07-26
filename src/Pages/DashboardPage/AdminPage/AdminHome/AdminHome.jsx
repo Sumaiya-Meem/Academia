@@ -4,7 +4,6 @@ import useCourse from "../../../../Hooks/useCourse";
 import { PiStudentBold } from "react-icons/pi";
 import { IoBookOutline } from "react-icons/io5";
 import { CgDollar } from "react-icons/cg";
-import { FaBookOpen } from "react-icons/fa";
 import { useMemo } from "react";
 import {
   ResponsiveContainer,
@@ -235,7 +234,7 @@ const AdminHome = () => {
             </Table.Cell>
             <Table.Cell className=" text-black">Python Programming Materclass</Table.Cell>
             <Table.Cell className=" text-black">Sarah Johson</Table.Cell>
-            <Table.Cell className=" text-black">1 March 2024</Table.Cell>
+            <Table.Cell className=" text-black">28 February 2024</Table.Cell>
             <Table.Cell>
               <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
                 Edit

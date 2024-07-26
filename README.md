@@ -1,8 +1,28 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Website Name: Academia
 
-Currently, two official plugins are available:
+Website Live link [Click here](https://academia-bd85b.web.app/).
+## Features
+- Secure Payment Processing
+- Dynamic Admin Dashboard
+- Notification System.
+- Coupon Management
+- Add/Remove course, instructor, course content in site as Admin
+- Responsive All Device
+- Role based Dashboard
+ 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Frontend
+- React
+- Axios Interceptor
+- Tanstack Query
+- React Form
+- Tailwind
+
+## Backend
+- MongoDB
+- Stripe
+- Express JS
+
+## Authentication
+- Firebase

@@ -70,7 +70,7 @@ const Dashboard = () => {
 
                 <>
                   
-                  
+                  <NavLink  to='/dashboard/adminProfile'><div className='text-base items-center flex gap-1 py-2 lg:pl-10 md:pl-3 text-gray-200 border-y border-gray-600 capitalize font-semibold'><ImProfile />Profile</div></NavLink>
 
                     <NavLink to='/dashboard/payment-history'><div className='text-base items-center flex gap-1 py-2 lg:pl-10 md:pl-3 text-gray-200 border-b border-gray-600 uppercase font-semibold'><FaHistory /> Payment History</div></NavLink>
 

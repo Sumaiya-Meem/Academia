@@ -22,6 +22,7 @@ import PaymentHistory from "../DashboardPage/UserPage/PaymentHistory";
 import AllCourses from "../HomePage/PopularCourse/AllCourse/AllCourses";
 import AllCartItem from "../AllCart/AllCartItem";
 import UpdateProfile from "../DashboardPage/UpdateProfile/UpdateProfile";
+import About from "../About/About";
 
 
 
@@ -37,6 +38,10 @@ import UpdateProfile from "../DashboardPage/UpdateProfile/UpdateProfile";
           element:<Home></Home>,
         },
         {
+          path: "/about",
+          element:<About></About>,
+        },
+        {
           path: "/allCart",
           element:<AllCartItem></AllCartItem>,
         },
@@ -44,7 +49,7 @@ import UpdateProfile from "../DashboardPage/UpdateProfile/UpdateProfile";
         path:"/detailCourse/:id",
         element:<SingleCourse></SingleCourse>,
         // loader:({params})=>fetch(`https://school-sphere-server-side.vercel.app/course/${params.id}`)
-        loader:({params})=>fetch(`http://localhost:5000/course/${params.id}`)
+        loader:({params})=>fetch(`https://school-sphere-server-side.vercel.app/course/${params.id}`)
        },
        {
         path: "/success-story",
@@ -53,7 +58,7 @@ import UpdateProfile from "../DashboardPage/UpdateProfile/UpdateProfile";
       {
         path: "/allCourses",
         element:<AllCourses></AllCourses>, 
-        loader:()=>fetch('http://localhost:5000/courseCount')
+        loader:()=>fetch('https://school-sphere-server-side.vercel.app/courseCount')
       },
         {
           path: "/login",
@@ -107,7 +112,7 @@ import UpdateProfile from "../DashboardPage/UpdateProfile/UpdateProfile";
         {
           path: 'updateUser/:id',
           element:<UpdateProfile></UpdateProfile>,
-          loader:({params})=>fetch(`http://localhost:5000/users/${params.id}`)
+          loader:({params})=>fetch(`https://school-sphere-server-side.vercel.app/users/${params.id}`)
         },
         
       //  user 

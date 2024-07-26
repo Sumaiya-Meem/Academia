@@ -79,9 +79,21 @@ const Header = () => {
       >
         All Course
       </NavLink>
+      <NavLink
+        to="/about"
+        className={({ isActive, isPending }) =>
+          isPending
+            ? "pending"
+            : isActive
+            ? "text-blue-600 font-bold menu   "
+            : "text-black"
+        }
+      >
+        About Us
+      </NavLink>
       {user ? (
         <NavLink
-          to="/dashboard/adminHome"
+          to="/dashboard/adminProfile"
           className={({ isActive, isPending }) =>
             isPending
               ? "pending"
