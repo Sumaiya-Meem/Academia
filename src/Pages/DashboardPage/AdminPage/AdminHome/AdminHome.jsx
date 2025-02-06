@@ -128,8 +128,8 @@ const AdminHome = () => {
           )}
         </div>
 
-        <div className="mt-5 flex">
-          <div className="w-[30%] bg-white mr-2">
+        <div className="mt-5 flex flex-col lg:flex-row gap-4 lg:gap-0">
+          <div className="w-[98%] lg:w-[30%] bg-white mr-2">
             <h1 className="text-xl font-bold mt-1 ml-2 font-[poppins]">
               Professors List
             </h1>
@@ -168,7 +168,7 @@ const AdminHome = () => {
             </div>
           </div>
 
-          <div className="w-[70%] bg-white">
+          <div className="w-[100%] lg:w-[70%] bg-white">
           <h1 className="text-xl font-bold mt-1 ml-2 font-[poppins]">
               Students List
             </h1>
