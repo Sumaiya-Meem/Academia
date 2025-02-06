@@ -185,9 +185,6 @@ const Header = () => {
                       {user?.email}
                     </span>
                   </Dropdown.Header>
-                  <Dropdown.Item>
-                    <Link to="/dashboard">Dashboard</Link>
-                  </Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item>
                     <Button color="" className="" onClick={handleLogout}>
